@@ -1,0 +1,134 @@
+\documentclass{article}
+\usepackage{amsmath,amsfonts,verbatim,amssymb}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{color}
+\oddsidemargin 0in
+\textwidth 6.5in
+\textheight=9in
+\topmargin=-0.5in
+
+\allowdisplaybreaks[3]
+\newcommand{\rrev}[1]{{\color{blue}#1}}
+
+\def\R{\mathbb{R}}
+
+\begin{document}
+
+
+
+\section*{Author's responses to Referee 1}
+Thank you very much for reading the manuscript carefully and providing useful suggestions. To facilitate the review process, we have marked all our changed in blue.  The following is our response to your suggestions and comments.
+
+\paragraph{Main comments:}
+\begin{enumerate}
+	\item  \textit{\textbf{Reviewer:}} \textit{P3, L42: The closed ball with respect to which norm?}
+	
+	\textbf{Response:} Thanks for the comment. The closed ball with respect to the Euclidean norm. We have modified it accordingly.
+
+	\item  \textit{\textbf{Reviewer:}} \textit{P4, L48-49: Please, give a reference for this assertion.}
+	
+	\textbf{Response:} {\color{red}{Unanswered.}}
+
+	\item  \textit{\textbf{Reviewer:}} \textit{P5, Algorithm 1: It is not clear to me what is the role of parameter $\underline{\beta}$. Is it only used as a lower bound for the initial $\beta_k^0$? If so, how can you assert that $\inf_k \beta_k \ge \underline{\beta}$ in Remark 3.1? The same applies to Algorithm 2 and Remark 4.1.}
+	
+	\textbf{Response:} Thanks for the comment. In Remark 3.1, we assert that
+\[\inf_k \beta_k \ge \beta_{min}:= \textstyle\min\left\{\frac{\eta}{2}\left(\frac{c}2 + \frac{M_1L}{-2\max\limits_{1 \le i \le m}\{g_i(x^\odot)\}}\right)^{-1},\underline{\beta}\right\}.\]
+In fact, if $\frac{\eta}{2}\left(\frac{c}2 + \frac{M_1L}{-2\max\limits_{1 \le i \le m}\{g_i(x^\odot)\}}\right)^{-1} > \underline{\beta}$, then $\beta_{min} = \underline{\beta}$, by the proof of Theorem~3.1(iii), we have the assert holds; if $\frac{\eta}{2}\left(\frac{c}2 + \frac{M_1L}{-2\max\limits_{1 \le i \le m}\{g_i(x^\odot)\}}\right)^{-1} < \underline{\beta}$, the assert is clearly valid. The same applies to Remark 4.1.
+
+	\item  \textit{\textbf{Reviewer:}} \textit{P7, L23: I cannot see how [38, Th 2.6] is applied (same doubt in Theorem 4.1, P16 L9). Are you assuming full domain of functions P1 and P2? If so, make it more explicit.}
+	
+	\textbf{Response:} Thanks for the comment. We assume that $P_1:\R^n\rightarrow\R$ and $P_2:\R^n\rightarrow\R$ are continuous convex functions, which were assumed at the beginning of the article.
+
+	\item  \textit{\textbf{Reviewer:}} \textit{P8, L43: Why is $\xi^k$ bounded? Maybe this it related with the full domain asked in item 4. The same for $\partial P_1(u^{k_j})$.}
+	
+	\textbf{Response:} Thanks for the comment. We assume that $P_1:\R^n\rightarrow\R$ and $P_2:\R^n\rightarrow\R$ are continuous convex functions at the beginning of the article.
+
+	\item  \textit{\textbf{Reviewer:}} \textit{P10, L10: How does one get the term $+\frac{1}{\beta_k}\|u^k - x^k\|^2$? It is supposed that the authors are using the convexity of P1, but it is not strongly convex.}
+	
+	\textbf{Response:} Thanks for the comment. It is only need the convexity of $P_1$. In fact, it contain two steps, we first use the convexity of $P_1$, then according to the nonnegative of $+\frac{1}{\beta_k}\|u^k - x^k\|^2$, we get it, i.e.,
+
+$P_1(x^{k+1})\leq P_1(u^k) + \tau_k(P_1(x^\odot) - P_1(u^k))\leq P_1(u^k) + \tau_k(P_1(x^\odot) - P_1(u^k)) + \frac{1}{2\beta_k}\|u^k - x^k\|^2$
+
+	\item  \textit{\textbf{Reviewer:}} \textit{P16, L29: Which is the closed form formula for $\tilde{\tau}$?}
+	
+	\textbf{Response:} Thanks for the comment. By the definition of $\ell^{y}(u)$ in (4.4), we have that
+\begin{equation*}
+\begin{aligned}
+\ell^{x^k}(A((1-\widetilde\tau)\widetilde u + \widetilde\tau x^\circledcirc) - b) &= \sum_{i=1}^p\varphi_+'\big((a_i^T x^k - b_i)^2\big)(A((1-\widetilde\tau)\widetilde u + \widetilde\tau x^\circledcirc) - b)_i^2\\
+& = \sum_{i=1}^p\varphi_+'\big((a_i^T x^k - b_i)^2\big)((\widetilde\tau A(x^\circledcirc - \widetilde u))^2 + 2\widetilde\tau A(x^\circledcirc - \widetilde u)(A\widetilde u - b) + (A\widetilde u - b)^2)_i\\
+&= \widetilde\tau^2(\sum_{i=1}^p\varphi_+'\big((a_i^T x^k - b_i)^2\big)(A(x^\circledcirc - \widetilde u))_i^2) \\
+&~~~~+ 2\widetilde\tau (\sum_{i=1}^p\varphi_+'\big((a_i^T x^k - b_i)^2\big)(A(x^\circledcirc - \widetilde u)(A\widetilde u - b))_i) \\
+&~~~~+ \sum_{i=1}^p\varphi_+'\big((a_i^T x^k - b_i)^2\big)(A\widetilde u - b)^2_i,
+\end{aligned}
+\end{equation*}
+which is a quadratic function with respect to $\widetilde\tau$. Therefore, from $\ell^{x^k}(A((1-\widetilde\tau)\widetilde u + \widetilde\tau x^\circledcirc) - b) = \tilde{\sigma}^{x^k}$, $\widetilde\tau$ admits a closed form formula.
+	\item  \textit{\textbf{Reviewer:}} \textit{P23, L44: How is such $\tau$ found?}
+	
+	\textbf{Response:} Thanks for the comment. In fact, 
+\begin{equation*}
+\begin{aligned}
+\sigma^2 &= \|A(\widehat x_{\rm spgl1} + \tau(A^\dagger b - \widehat x_{\rm spgl1})) - b\|^2\\
+ &=\tau^2\|A(A^\dagger b - \widehat x_{\rm spgl1})\|^2 + 2\tau\|A(A^\dagger b - \widehat x_{\rm spgl1})\|\|A(\widehat x_{\rm spgl1} - b\| + \|A(\widehat x_{\rm spgl1} - b\|^2
+\end{aligned}
+\end{equation*}
+which is a quadratic function with respect to $\tau$. It is easy to calculate $\tau$.
+
+
+	\item  \textit{\textbf{Reviewer:}} \textit{Numerical results: As far as I see, Algorithm 3 does not require to find a completely feasible initial point ($x_0\in F$) but just in C ($x_0\in C$). I did not find any statement about how the initial point is chosen for ESQM$_{\rm ls}$. In principle, SPGL1 and Slater point are not needed. Therefore, it is not fair to say that FPA is faster since the sum of the iteration time plus the required initialization exceeds the CPU time of ESQM$_{\rm ls}$. Would it be any other cheaper way to compute $x_0$?}
+	
+	\textbf{Response:} {\color{red}{Unanswered.}}
+
+    \item  \textit{\textbf{Reviewer:}} \textit{P26: In table 2, the time of SPGL1 for i = 4 is greater than for i = 6. Does it make any sense?}
+	
+	\textbf{Response:} Thanks for this nice point. In fact, The result in table 2 is the average calculated by randomly generating 30 sets of data. When i = 4, two sets of data take a lot of time, so SPGL1 takes more time than when i = 6.
+
+    \item  \textit{\textbf{Reviewer:}} \textit{References: It seems that there exists a more recent version (2016) of [38]. Update [43] and all the referenced results from there to its published version (SIAM J. Optim., 31(3), 2024--2054.).}
+	
+	\textbf{Response:} Thanks for this nice point. We have modified it according to this suggestion.
+
+
+
+
+
+
+\end{enumerate}
+
+
+\section*{Author's responses to Referee 2}
+Thank you very much for reading the manuscript carefully and providing useful suggestions. The following is our response to your suggestions and comments one by one.
+%To facilitate the review process, we have marked all our changed in blue.
+
+\paragraph{Main comments:}
+\begin{enumerate}
+	\item \textit{\textbf{Reviewer:}} \textit{ a) In the Introduction, the authors related their methodology with Sequential Quadratic Programming. However, this link is unclear since this manuscript deals with nonsmooth DC programs, and SQP is for (twice) differentiable problems. Could the authors please give more details on such a connection? Is it related to the sequential DC programming ideas from [F]?}
+	
+	\textbf{Response:} {\color{red}{Unanswered.}}
+	
+	\item \textit{\textbf{Reviewer:}} \textit{ b) As far as we can tell, Definition 2.3 is about criticality and not stationarity. Stationarity in DC programming is a strong condition, and most algorithms are only ensured to compute critical points. Please see [E] for the differences between these two conditions.}
+	
+	\textbf{Response:} Thanks for the comment. We agree with this comment. We modified stationary point to be critical point.
+	
+	\item  \textit{\textbf{Reviewer:}} \textit{ c) Theorem 3.2. Please recall that $u^k = \tilde u$.}
+	
+	\textbf{Response:} Thanks for the comment. We added that the sequence $\{u^k\}$ is generated by the algorithm 1 and $u^k = \tilde u$.
+
+	\item \textit{\textbf{Reviewer:}} \textit{ d) Assumption 4.1. The notation $\xi$ has already been employed for the subgradient of $P_2$.}
+
+    \textbf{Response:} Thanks for the comment. We replace $\xi$ with $\varphi$ in Assumption 4.1 and beyond.
+
+	\item \textit{\textbf{Reviewer:}} \textit{ e) Assumption 4.2. The Slater point must be known.}
+
+    \textbf{Response:} Thanks for the comment. We definitely agree that the Slater point must be known. We modified Assumption 3.1 and 4.2.
+
+	\item \textit{\textbf{Reviewer:}} \textit{ f) Subproblem (4.6): Should it be $\sigma^x$?}
+
+    \textbf{Response:} Thanks for the comment. It should be $\sigma$ in subproblem (4.6).
+
+	\item \textit{\textbf{Reviewer:}} \textit{ g) Please compare the algorithms with the method presented in [42], by the third author.}
+
+    \textbf{Response:} {\color{red}{Unanswered.}}
+\end{enumerate}
+
+
+\end{document}
