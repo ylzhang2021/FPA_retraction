@@ -110,13 +110,42 @@ Thank you very much for reading the manuscript carefully and providing useful su
 
 \paragraph{Main comments:}
 \begin{enumerate}
+   \item \textit{\textbf{Reviewer:}} {\it The retraction strategy employed by the authors is nothing but an interpolation step, already present in the Support Hyperplane Method (SHM) by Veinott (1967) (see reference [A]). Moreover, in contrast to the setting of the proposed Algorithm 1, the work [A] (and more recently its regularized version in [B]) does not require the constraint function(s) to be convex, but the feasible set. This weaker assumption allows the nonlinear constraint function to have only generalized convexity properties (e.g., quasi-convexity, alpha-convexity [B]). That being said, we believe it is possible to weaken the convexity assumption on the constraint functions in Algorithm 1 with only a few modifications in the convergence analysis. Could the authors confirm that?
+       
+       Apart from the interpolation step, what are the main differences between the proposed methodologies and paper [42]?
+       
+Although Algorithm 1 employs the SHM's interpolation step, it differs substantially from SHM due to the DC structure. However, Algorithm 1, as well as Algorithm 2, handle the DC structure similarly to the Proximal Linearized Method for DC programming [C,D,E]: at every iteration, the concave part is linearized, and a quadratic term is added to form the objective function in the convex subproblem. In particular, the method in [E] seems more general than Algorithms 1 and 2 because the former allows for DC-constrained DC programs. Therefore, we kindly ask the authors to put their methodology in perspective with [E].
+
+That being said, we see the methodology presented in this manuscript as a "linearized proximal method with support hyperplane for DC programs."
+Indeed, the above seems a better title for the work because it connects the core ideas in the manuscript.}
+
+    \textbf{Response:} Thanks for the comment. 
+    
+    {\it Difference from [A,B]}: We would like to point out that our method is {\it significantly different} from the one in [A,B]. Indeed, [A,B] employs a cutting plane strategy. In particular, as the algorithm progresses, the number of halfspaces involved in the subproblem {\em grows}, with many of them constructed based on information from the \emph{past iterates}. They exploited the fact that compact convex sets can be written as the intersection of (infinitely many) halfspaces, and deduced convergence based on this {\em without} requiring any descent property of the (interpolated) sequence generated.
+    
+    In contrast, our method only requires a {\it fixed} number of halfspaces in each iteration, and the constraint functions are linearized only at the \emph{current iterate}. Thus, the computational effort for solving each subproblem is similar. Moreover, we have to sufficiently regularize the objective of our subproblem so that our retraction (or interpolation) step induces a descent: this is an ingredient not present in the method in [A,B] because their convergence is based on the fact that the intersection of the \emph{growing} number of halfspaces constructed in their algorithm converges to the original feasible set.
+    
+    {\it Difference from [42]}: Apart from the retraction step, the key difference is that we are using linear approximations to the constraint functions in the subproblems, while the method in [42] is based on quadratic \emph{majorants} of the constraint functions. Thus, one obtains a feasible point by solving the subproblems in the algorithm in [42], but one does not necessarily obtain a feasible point by solving the subproblem in the FPA method: hence, a retraction step kicks in to restore feasibility. Finally, as mentioned in footnote 1 on page 2, our subproblems based on linear approximations are potentially simpler to solve than those quadratically constrained subproblems in [42].
+    
+    {\it Difference from [C,D]:} The algorithms proposed in these papers do not seem to use any approximation to the constraint set or exploit the explicit form of the constraint functions.
+    
+    {\it Difference from [E]:} The most closely related algorithm is algorithm 2 in [E]. In this algorithm, the DC constraint function is replaced a convex majorant. In spirit, this is similar to what is done in standard DCA (similar to, for example, [42]), and is different from our algorithm as discussed above. Moreover, the algorithm in [E] constructs subproblems by including only constraints that are approximately ``active". This is an ingredient not considered in our algorithm and it is an interesting future research direction as a possible strategy for constructing simpler subproblems for our algorithm.
+    
+    Finally, after looking at [A,B] kindly suggested by the reviewer, we feel that the term ``support hyperplane method" typically reminds the readers of cutting plane strategy, which usually involves a {\em growing number of} halfspaces constructed from the current and {\em previous iterates}. Our method, in contrast, involves a {\em fixed} number of halfspaces constructed via linear approximating the constraint functions at the current iterate. Thus, we believe that it is better not to mention supporting hyperplane in the title. Keep the current title may be appropriate.
+    
+    \item \textit{\textbf{Reviewer:}} {\it The assumptions are poorly stated. For instance, Assumption 3.1 (announced in the key Theorems 3.1 and 3.2) asserts that $g_i$ is convex and a Slater point exists. However, the authors need much more than this: $g_i$ needs to be differentiable (rightly stated in the proofs and other parts), and the Slater point must be known. Note that knowing a Slater point is much more restrictive than only assuming its existence. We kindly ask the authors to fix this issue.}
+        
+    \textbf{Response:} Thanks for the comment. We believe that there could be some misunderstanding.
+    
+    Indeed, we have made it clear right after stating model (1.1) that there are differentiability assumptions on $g_i$ (which unfortunately went into page 2 and probably got unnoticed). We have been referring to model problem (1.1) in all our assumptions and theorems, which should be sufficient to indicate that we are assuming all conditions stated right after (1.1) for $P_1$, $P_2$, $g_i$ and $C$.
+
 	\item \textit{\textbf{Reviewer:}} \textit{ a) In the Introduction, the authors related their methodology with Sequential Quadratic Programming. However, this link is unclear since this manuscript deals with nonsmooth DC programs, and SQP is for (twice) differentiable problems. Could the authors please give more details on such a connection? Is it related to the sequential DC programming ideas from [F]?}
 	
-	\textbf{Response:} We believe that our method is closer to SQP-type methods than sequential DC programming method. 
-    
+	\textbf{Response:} Thanks for the comment.
+
     A key common feature between our method and SQP-type method lies in the way the constraint set is dealt with. In both methods, the constraint functions are replaced by linear approximations and feasibility to the original problem is not guaranteed by solving the subproblems. Our key innovation is to further incorporate the ``retract" idea from manifold optimization to create a feasible next iterate.
     
-    This is different from the sequential DC programming which makes use of subproblems whose constraint sets are {\em subset} of the original problem. Hence, solving these DC subproblems will automatically create a feasible point without the need of other strategies such as ``retract".
+    As for the sequential DC programming method the reviewer suggested, it appears to us that the constraint set is fixed for all iterations. Thus, it is different from our method which is constructing successive polyhedral approximation to the feasible set.
 	
 	\item \textit{\textbf{Reviewer:}} \textit{ b) As far as we can tell, Definition 2.3 is about criticality and not stationarity. Stationarity in DC programming is a strong condition, and most algorithms are only ensured to compute critical points. Please see [E] for the differences between these two conditions.}
 	
