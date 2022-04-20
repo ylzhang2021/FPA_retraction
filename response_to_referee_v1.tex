@@ -88,10 +88,10 @@ which is a quadratic function in $\tau$. It is easy to calculate $\tau$.
 	\item  \textit{\textbf{Reviewer:}} \textit{Numerical results: As far as I see, Algorithm 3 does not require to find a completely feasible initial point ($x_0\in F$) but just in C ($x_0\in C$). I did not find any statement about how the initial point is chosen for ESQM$_{\rm ls}$. In principle, SPGL1 and Slater point are not needed. Therefore, it is not fair to say that FPA is faster since the sum of the iteration time plus the required initialization exceeds the CPU time of ESQM$_{\rm ls}$. Would it be any other cheaper way to compute $x_0$?}
 	
 	\textbf{Response:} Thanks for the comment. We choose different initial point for comparison in problem (6.1). When the initial point
-$x^0 = (0, 0, \cdots, 0)$, we have the results in Table 1; When the initial point $x^0$ is given as in (6.6), we have the results in Table 2. Since the problem is non-convex, we can see from the results that the initial value has great influence on the efficiency of the algorithms. Although ESQM$_{\rm ls}$ is faster than FPA$_{\rm retract}$ when the initial value is zero, FPA$_{\rm retract}$ is faster than ESQM$_{\rm ls}$ when the initial point $x^0$ is given as in (6.6). 
+$x^0 = (0, 0, \cdots, 0)$, we have the results in Table 1; When the initial point $x^0$ is given as in (6.6), we have the results in Table 2. Since the problem is non-convex, we can see from the results that the initial value has great influence on the efficiency of the algorithms. Although ESQM$_{\rm ls}$ is faster than FPA$_{\rm retract}$ when the initial value is zero, FPA$_{\rm retract}$ is faster than ESQM$_{\rm ls}$ when the initial point $x^0$ is given as in (6.6).
 
 \begin{table}[H]
-\caption{Computational results for problem (6.1) with initial point $x^0 = (0, 0, \cdots, 0)$}\label{table1}
+\caption{Computational results for problem (6.2) with initial point $x^0 = (0, 0, \cdots, 0)$}\label{table1}
 \begin{center}
 {\footnotesize
 \begin{tabular}{|c|c|c|c|c|c|c|}\hline
@@ -126,7 +126,7 @@ $x^0 = (0, 0, \cdots, 0)$, we have the results in Table 1; When the initial poin
 
 
 \begin{table}[H]
-\caption{Computational results for problem (6.1) with initial point $x^0$ is given as in (6.6)}\label{table1}
+\caption{Computational results for problem (6.2) with initial point $x^0$ is given as in (6.6)}\label{table1}
 \begin{center}
 {\footnotesize
 \begin{tabular}{|c|c|c|c|c|c|c|}\hline
@@ -244,7 +244,7 @@ Indeed, the above seems a better title for the work because it connects the core
 
 	\item \textit{\textbf{Reviewer:}} \textit{ g) Please compare the algorithms with the method presented in [42], by the third author.}
 
-    \textbf{Response:} Thanks for the comment. We compare the algorithms with SCP presented in [42] on solving problem (6.3):
+    \textbf{Response:} Thanks for the comment. We compare the algorithms with SCP presented in [42] on solving problem (6.4):
     \begin{equation}\label{pr1}
        \begin{array}{rl}
         \min\limits_{x\in\R^n} & \|x\|_1 - \mu\|x\| \\\\
@@ -264,17 +264,17 @@ Indeed, the above seems a better title for the work because it connects the core
 &   0.56 &   3.17 &  10.04 &  23.39 &  45.84\\\cline{2-2} \multirow{1}*{} & \multirow{1}*{Slater}
 &   0.01 &   0.02 &   0.06 &   0.10 &   0.15\\\cline{2-2} \multirow{1}*{} & \multirow{1}*{SPGL1}
 &   3.24 &  13.12 &  34.00 & 205.99 & 233.59\\\cline{2-7} \multirow{1}*{} & \multirow{1}*{SCP}
-&   2.67 &  14.19 &  19.85 &  39.25 &  58.30\\\cline{2-2} \multirow{1}*{}  & \multirow{1}*{FPA$_{\rm retract}$} 
+&   2.67 &  14.19 &  19.85 &  39.25 &  58.30\\\cline{2-2} \multirow{1}*{}  & \multirow{1}*{FPA$_{\rm retract}$}
 &   4.57 & 191.87 &  40.39 & 128.89 & 160.03\\\cline{2-2} \multirow{1}*{}  & \multirow{1}*{ESQM$_{{\rm ls},\ \delta = 0.5}$}
 &  17.38 &  66.68 & 123.05 & 211.69 & 179.34\\\cline{2-2} \multirow{1}*{}  & \multirow{1}*{ESQM$_{{\rm ls},\ \delta = 0.1}$}
 &  16.54 &  65.41 & 137.92 & 217.52 & 294.88\\\cline{2-2} \multirow{1}*{}  & \multirow{1}*{ESQM$_{{\rm ls},\ \delta = 0.02}$}
 &  18.35 &  82.69 & 195.55 & 329.15 & 397.47\\\cline{1-7} \multirow{5}*{Iter} & \multirow{1}*{SCP}
-&    200 &    325 &    203 &    245 &    237\\\cline{2-2} \multirow{1}*{}     & \multirow{1}*{FPA$_{\rm retract}$} 
+&    200 &    325 &    203 &    245 &    237\\\cline{2-2} \multirow{1}*{}     & \multirow{1}*{FPA$_{\rm retract}$}
 &    577 &   6069 &    567 &   1072 &    859\\\cline{2-2} \multirow{1}*{}     & \multirow{1}*{ESQM$_{{\rm ls},\ \delta = 0.5}$}
 &   2590 &   2629 &   2204 &   2256 &   1236\\\cline{2-2} \multirow{1}*{}     & \multirow{1}*{ESQM$_{{\rm ls},\ \delta = 0.1}$}
 &   2479 &   2578 &   2470 &   2315 &   2026\\\cline{2-2} \multirow{1}*{}     & \multirow{1}*{ESQM$_{{\rm ls},\ \delta = 0.02}$}
 &   2766 &   3266 &   3505 &   3506 &   2741\\\cline{1-7} \multirow{6}*{RecErr} & \multirow{1}*{SPGL1}
-&  1.699 &  3.423 &  1.826 &  2.630 &  2.465\\\cline{2-7} \multirow{1}*{} & \multirow{1}*{SCP}   
+&  1.699 &  3.423 &  1.826 &  2.630 &  2.465\\\cline{2-7} \multirow{1}*{} & \multirow{1}*{SCP}
 &  0.071 &  0.073 &  0.075 &  0.074 &  0.075\\\cline{2-2} \multirow{1}*{} & \multirow{1}*{FPA$_{\rm retract}$}
 &  0.071 &  0.073 &  0.075 &  0.074 &  0.075\\\cline{2-2} \multirow{1}*{} & \multirow{1}*{ESQM$_{{\rm ls},\ \delta = 0.5}$}
 &  0.071 &  0.073 &  0.075 &  0.074 &  0.075\\\cline{2-2} \multirow{1}*{} & \multirow{1}*{ESQM$_{{\rm ls},\ \delta = 0.1}$}
