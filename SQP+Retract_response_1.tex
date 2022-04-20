@@ -175,7 +175,7 @@ We say that the Mangasarian-Fromovitz constraint qualifications for \eqref{P0} h
 \end{matrix}\right\} \Rightarrow\lambda_i =0, ~ i = 1,\ldots, m.
 \]
 \end{definition}
-Note that if the $g_i$'s in \eqref{P0} are in addition convex and the (generalized) Slater condition holds, i.e., $\{x \in C: g_i(x) < 0, ~ i = 1, \ldots, m\} \neq \emptyset $, then the MFCQ holds at any point in ${\cal F}$.
+Note that if the $g_i$'s in \eqref{P0} are in addition convex and the (generalized) Slater condition holds, i.e., $\{x \in C: g_i(x) < 0, ~ i = 1, \ldots, m\} \neq \emptyset $, {\color{blue} one can see from \cite[p341]{Ber95} that the MFCQ holds at any point in ${\cal F}$.}
 %Next, we recall the definition of stationary point of \eqref{P0} when $g$ is smooth.
 \begin{definition}[{{\bf {\color{blue} Critical point}}}]\label{Stationary}
 We say that $x\in\R^n$ is a {\color{blue}critical point} of \eqref{P0} if there exists $\lambda = (\lambda_1, \lambda_2, \ldots, \lambda_m)\in\R_+^m$ such that $(x,\lambda)$ satisfies
@@ -926,26 +926,26 @@ Thus, $x\in S$ implies $(1 - \mu)\max\limits_{J\in \mathcal{J}}\|x_J\| \le (1 - 
 
 With these choices of $M > 0$, problem \eqref{E3} is a special case of \eqref{P0} with $m = 1$, $P_1(x)= \sum\limits_{J\in\mathcal{J}}\|x_J\|$, $P_2(x) = \mu\|x\|$, $g_1(x) = \|Ax - b\|^2 - \sigma^2$ and $C = \{x\in\R^n:\; \max\limits_{J\in \mathcal{J}}\|x_J\| \leq M\}$. Moreover, Assumption~\ref{assumption1} holds for \eqref{E3} with $\xfeas = \tx$. Therefore, we can apply Algorithm~\ref{SQP_retract} to \eqref{E3}. In our numerical experiments below, we will be solving random instances of \eqref{E3} with $M = (1 - \mu)^{-1}[\sum\limits_{J\in\mathcal{J}}\|\tx_J\| - \mu\|\tx\|]$.
 
-\subsection{Compressed sensing with Cauchy noise}\label{sec6.2}
-In compressed sensing, when the measurement is contaminated with Cauchy noise, the Lorentzian norm $\|y\|_{LL_2,\gamma}:= \sum\limits_{i=1}^p\log(1 + \gamma^{-2}y_i^2)$ can be employed as the loss function \cite{CaBA10,CaRA16}, where $\gamma > 0$. In this section, we consider the following model for recovering sparse signal from measurements contaminated with Cauchy measurement noise, which uses an $\ell_{1-2}$-type regularizer as in \cite{YiLH15}:
+\subsection{Compressed sensing with Cauchy noise in complex number}\label{sec6.2}
+{\color{blue} In compressed sensing, when the measurement is contaminated with Cauchy noise, the Lorentzian norm $\|y\|_{LL_2,\gamma}:= \sum\limits_{i=1}^p\log(1 + \gamma^{-2}y_i^2)$ can be employed as the loss function \cite{CaBA10,CaRA16}, where $\gamma > 0$. In this section, we consider the following model for recovering sparse signal in complex number from measurements contaminated with Cauchy measurement noise, which motivated by the used of $\ell_{1-2}$-type regularizer in \cite{YiLH15}:
 \begin{equation}\label{E2}
   \begin{array}{rl}
-\min\limits_{x\in\R^n} & \|x\|_1 - \mu\|x\|  \\
+\min\limits_{x\in\R^n} & \sum\limits_{J\in\mathcal{J}}\|x_J\| - \mu\|x\| \\\\
 {\rm s.t.} & \|Ax - b\|_{LL_2,\gamma}\leq \overline{\sigma},
   \end{array}
 \end{equation}
-where $A\in\R^{p\times n}$ has full row rank, $b\in\R^p$, $\mu \in (0,1)$ and $\overline{\sigma} \in (0,\|b\|_{LL_2,\gamma})$. %Since $A$ has full row rank, there exists $\hx\in\R^n$ such that $A \hx = b$.
+where $A\in\R^{p\times n}$ has full row rank, $b\in\R^p$, $\mu \in (0,1)$ and $\overline{\sigma} \in (0,\|b\|_{LL_2,\gamma})$, $\mathcal{J}$ is a partition of $\{1,2,\cdots, n\}$, $x_J\in\R^{|J|}$ is the subvector of $x$ indexed by $J\in\mathcal{J}$.%Since $A$ has full row rank, there exists $\hx\in\R^n$ such that $A \hx = b$.
 
 Although the feasible region of \eqref{E2} is unbounded and is not a special case of \eqref{P1}, one can argue as in the discussion following \eqref{E3} that \eqref{E2} is equivalent to the following model:
 \begin{equation}\label{E4}
   \begin{array}{rl}
-\min\limits_{x\in\R^n} & \|x\|_1 - \mu\|x\|  \\
+\min\limits_{x\in\R^n} & \sum\limits_{J\in\mathcal{J}}\|x_J\| - \mu\|x\| \\
 {\rm s.t.} & \|Ax - b\|_{LL_2,\gamma}\leq \overline{\sigma},\\
            & \|x\|_{\infty} \leq M_1
   \end{array}
 \end{equation}
-as long as $M_1\ge \frac{\|A^\dagger b\|_1 - \mu\|A^\dagger b\|}{1 - \mu}$.
-Notice that \eqref{E4} is a special case of \eqref{P1} with $P_1(x) = \|x\|_1$, $P_2(x) = \mu\|x\|$,  $\sigma=\overline{\sigma}$, $\ell(y) = \|y\|_{LL_2,\gamma}$, and $C = \{x\in\R^n:\; \|x\|_{\infty} \leq M_1\}$. One can see  from Example \ref{Loren} that Assumption~\ref{gassum} is satisfied for \eqref{E4}, and Assumption~\ref{assumption4} is satisfied for \eqref{E4} with $\xfeasss = A^\dagger b$. Hence, we can apply Algorithm \ref{SQP_retract2} to \eqref{E4}. In our numerical experiments below, we will be solving random instances of \eqref{E2} with $M_1 = \frac{\|A^\dagger b\|_1 - \mu\|A^\dagger b\|}{1 - \mu}$.
+as long as $M_1 \ge (1 - \mu)^{-1}[\sum\limits_{J\in\mathcal{J}}\|(A^\dagger b)_J\| - \mu\|A^\dagger b\|]$.
+Notice that \eqref{E4} is a special case of \eqref{P1} with $P_1(x) = \sum\limits_{J\in\mathcal{J}}\|x_J\|$, $P_2(x) = \mu\|x\|$,  $\sigma=\overline{\sigma}$, $\ell(y) = \|y\|_{LL_2,\gamma}$, and $C = \{x\in\R^n:\; \|x\|_{\infty} \leq M_1\}$. One can see  from Example \ref{Loren} that Assumption~\ref{gassum} is satisfied for \eqref{E4}, and Assumption~\ref{assumption4} is satisfied for \eqref{E4} with $\xfeasss = A^\dagger b$. Hence, we can apply Algorithm \ref{SQP_retract2} to \eqref{E4}. In our numerical experiments below, we will be solving random instances of \eqref{E2} with $M_1 = (1 - \mu)^{-1}[\sum\limits_{J\in\mathcal{J}}\|(A^\dagger b)_J\| - \mu\|A^\dagger b\|]$. }
 
 \subsection{Numerical results}
 In this subsection, we perform numerical experiments to study the performance of Algorithm~\ref{SQP_retract} on solving \eqref{E3} and that of Algorithm~\ref{SQP_retract2} on solving \eqref{E4}.
@@ -992,12 +992,12 @@ In Algorithm~\ref{ESQM}, we let $c = 10^{-4}$, $\beta_0 = 1$, $t = \frac{1}{2}$.
 \textbf{Slater point:} We take the Slater points as $\xfeas = \xfeasss = A^\dagger b$, and compute $A^\dagger b$ via the MATLAB commands \verb+[Q,R]=qr(A',0); x=Q*(R'\b)+.
 
 \textbf{Initialization:} For \eqref{E3}, we first solve \eqref{E1} with $\mu = 0$ approximately using SPGL1 \cite{BeFr09} (version 2.1), under default settings, to obtain an approximate solution $x_{\rm spgl1}$. We then project $x_{\rm spgl1}$ onto the box $\{x:\; \max\limits_{J\in{\cal J}}\|x_J\|\le M\}$ to obtain $\widehat x_{\rm spgl1}$. The initial point $x^0$ is then generated as follows:
-\begin{equation*}
+\begin{equation}\label{initial1}
 x^0 = \begin{cases}
   \widehat x_{\rm spgl1} + \tau(A^\dagger b - \widehat x_{\rm spgl1}) & {\rm if}\ \|A\widehat x_{\rm spgl1} - b\| > \sigma,\\
   \widehat x_{\rm spgl1} & {\rm otherwise},
 \end{cases}
-\end{equation*}
+\end{equation}
 where $\tau\in(0, 1)$ is a positive root of the quadratic equation $\|A(\widehat x_{\rm spgl1} + \tau(A^\dagger b - \widehat x_{\rm spgl1})) - b\|^2=\sigma^2$.
 %In fact, since $\|A\xfeas - b\|^2 < \sigma^2$ and $\|Ax_{\rm spgl1} - b\|^2 > \sigma^2$, there must be exists $t\in[0, 1]$ such that $x = x_{\rm spgl1} + t(\xfeas - x_{\rm spgl1})$ with $\|Ax - b\|^2 = \sigma^2$.
 
@@ -1005,17 +1005,17 @@ For \eqref{E4}, we first find a positive constant $\tau_0\in(0, 1)$ so that $\|b
 Then we apply the SPGL1 \cite{BeFr09} (version 2.1) with default settings to approximately solve the following convex problem to obtain an approximate solution $x_{\rm spgl1}$:
 \begin{equation}\label{SPGL1nonconvexL1}
 \begin{array}{rl}
-  \min\limits_{x\in \R^n} & \|x\|_1\\
+  \min\limits_{x\in \R^n} & \sum\limits_{J\in\mathcal{J}}\|x_J\| \\
   {\rm s.t.} & \ell^{\tau_0A^\dagger b}(Ax - b)\le \widetilde\sigma^{\tau_0A^\dagger b},
 \end{array}
 \end{equation}
 where $\ell^{\tau_0A^\dagger b}$ and $\widetilde\sigma^{\tau_0A^\dagger b}$ are defined as in \eqref{defell} and \eqref{defsigma} respectively, with $\tau_0A^\dagger b$ in place of $y$ there. We then project $x_{\rm spgl1}$ onto the box $\{x:\; \|x\|_\infty\le M_1\}$ to obtain $\widetilde x_{\rm spgl1}$. The initial point $x^0$ is then generated as follows:
-\begin{equation*}
+\begin{equation}\label{initial2}
 x^0 = \begin{cases}
   \widetilde x_{\rm spgl1} + \tau_1(A^\dagger b - \widetilde x_{\rm spgl1}) & {\rm if}\ \|A\widetilde x_{\rm spgl1} - b\|_{LL_2,\gamma} > \overline\sigma,\\
   \widetilde x_{\rm spgl1} & {\rm otherwise},
 \end{cases}
-\end{equation*}
+\end{equation}
 where $\tau_1\in (0, 1)$ is chosen so that $\left\|b - A\left[\widetilde x_{\rm spgl1} + \tau_1(A^\dagger b - \widetilde x_{\rm spgl1})\right]\right\|_{LL_2,\gamma} = \overline\sigma$.\footnote{Note that $b - A[\widetilde x_{\rm spgl1} + \tau_1(A^\dagger b - \widetilde x_{\rm spgl1})] = (1 - \tau_1)(b-A \widetilde x_{\rm spgl1})$} One can find such a constant $\tau_1$ efficiently by first applying Newton's method to obtain a root $s_*$ of the function $s\mapsto \|\sqrt{s}(b - A\widetilde x_{\rm spgl1})\|_{LL_2,\gamma} - \overline\sigma$ (initialized at $s = 0$) and then setting $\tau_1 = 1 - \sqrt{s_*}$.
 
 \textbf{Termination criteria.} The termination criteria are based on verifying approximately conditions (i), (ii) and (iii) in Definition~\ref{Stationary} by $x = u^k$ and $\lambda = \lambda_k$, where $u^k$ comes from the solution of the subproblems \eqref{subproblem2}, \eqref{subproblem4} or \eqref{subproblemhaha}, and $\lambda_k$ is a Lagrange multiplier corresponding to the affine inequality constraint induced from $g_1$.
@@ -1055,7 +1055,7 @@ where $j$ is the size of each block and $k$ is the number of nonzero blocks. We 
 
 %We compare Algorithm~\ref{SQP_retract} with Algorithm~\ref{ESQM} with $m = 1$, $P_1(x)= \sum\limits_{J\in\mathcal{J}}\|x_J\|$, $P_2(x) = \mu\|x\|$, $g_1(x) = \|Ax - b\|^2 - \sigma^2$ and $C = \{x\in\R^n:\; \|x\|_{\infty} \leq M\}$. We initialize two Algorithms at $x^0$ (see \eqref{initia}) and terminate two Algorithms when \eqref{termination1} holds.
 
-In our numerical tests, we let $\mu =0.95$, $j = 5$, $(p,n,k) = (720i,2560i,60i)$ with $i\in \{2, 4, 6, 8, 10\}$. For each $i$, we generate 30 random data as described above. We present the computational results in Table~\ref{table1}, averaged over the $30$ random instances. Here, Algorithm~\ref{SQP_retract} is denoted by FPA$_{\rm retract}$, Algorithm~\ref{ESQM} with different $\delta$ is denoted by ESQM$_{\rm ls}$ with the $\delta$ specified, and recall that SPGL1 is the algorithm used for obtaining initial points for FPA$_{\rm retract}$ and ESQM$_{\rm ls}$. We present the time for computing the QR decomposition of $A^T$ (denoted by QR), the time for computing $A^\dagger b$ given the QR factorization of $A^T$ (denoted by Slater), the CPU times of the algorithms (CPU time),\footnote{The reported CPU times of FPA$_{\rm retract}$ and ESQM$_{\rm ls}$ do not include the time for generating $\xfeas$ and $x^0$.} the number of iterations (denoted by Iter), the recovery errors $\text{RecErr} := \frac{\|x^* - \xorig\|}{\max\{1, \|\xorig\|\}}$ and the residuals ${\rm Residual} := \frac{\|Ax^* - b\| - \sigma }{\sigma}$, where $x^*$ is the approximate solution returned by the respective algorithm.
+In our numerical tests, we let $\mu =0.95$, $j = 5$, $(p,n,k) = (720i,2560i,60i)$ with $i\in \{2, 4, 6, 8, 10\}$. For each $i$, we generate 20 random data as described above. We present the computational results in Table~\ref{table1}, averaged over the $20$ random instances. Here, Algorithm~\ref{SQP_retract} is denoted by FPA$_{\rm retract}$, Algorithm~\ref{ESQM} with different $\delta$ is denoted by ESQM$_{\rm ls}$ with the $\delta$ specified, and recall that SPGL1 is the algorithm used for obtaining initial points for FPA$_{\rm retract}$ and ESQM$_{\rm ls}$. We present the time for computing the QR decomposition of $A^T$ (denoted by QR), the time for computing $A^\dagger b$ given the QR factorization of $A^T$ (denoted by Slater), the CPU times of the algorithms (CPU time),\footnote{The reported CPU times of FPA$_{\rm retract}$ and ESQM$_{\rm ls}$ do not include the time for generating $\xfeas$ and $x^0$.} the number of iterations (denoted by Iter), the recovery errors $\text{RecErr} := \frac{\|x^* - \xorig\|}{\max\{1, \|\xorig\|\}}$ and the residuals ${\rm Residual} := \frac{\|Ax^* - b\| - \sigma }{\sigma}$, where $x^*$ is the approximate solution returned by the respective algorithm.
 
 From Table ~\ref{table1}, one can see that the recovery errors of FPA$_{\rm retract}$ and ESQM$_{\rm ls}$ are comparable, and FPA$_{\rm retract}$ is usually faster. Moreover, the performance of ESQM$_{\rm ls}$ appears to be quite sensitive to the choice of $\delta$.
 
@@ -1097,11 +1097,18 @@ From Table ~\ref{table1}, one can see that the recovery errors of FPA$_{\rm retr
 
 \subsubsection{ Compressed sensing with Cauchy noise}
 
-We compare Algorithm~\ref{SQP_retract2} and Algorithm~\ref{ESQM} on solving random instances of \eqref{E4}. Specifically, we generate an $A\in \R^{p\times n}$ with i.i.d standard Gaussian entries and then normalize each column of $A$. Next, we generate a vector $u\in\R^k$ with i.i.d standard Gaussian entries. We choose an index set $I$ of size $k$ at random and define the sparse original signal $\xorig\in \R^n$ by setting $(\xorig)_I = u$ and $(\xorig)_{\bar{I}} = 0$. We then let $b = A\xorig + 0.005\hat{\epsilon}$ with $\hat{\epsilon}_i$ independently following the Cauchy$(0, 1)$ distribution, i.e., $\hat{\epsilon}_i = \tan(\pi(\widetilde{\epsilon}_i - \frac{1}{2}))$, where $\widetilde{\epsilon}\in\R^p$ is a random vector with i.i.d entries uniformly chosen in $[0, 1]$. Finally, we set $\overline{\sigma} = 1.2\|0.005\hat{\epsilon}\|_{LL_2,\gamma}$ with $\gamma = 0.05$.
+{\color{red}We compare Algorithm~\ref{SQP_retract2} and Algorithm~\ref{ESQM} on solving random instances of \eqref{E4}. Specifically, we generate two matrices $A_1\in \R^{p\times n}$ and $A_2\in \R^{p\times n}$ with i.i.d standard Gaussian entries, and let
+\begin{equation}
+A := \left[ \begin{matrix}
+A_1 & -A_2\\
+A_2 & A_1
+\end{matrix} \right]
+\end{equation}
+ then normalize each column of $A$. Next, we generate two vectors $u_1\in\R^k$ and $u_2\in\R^k$ with i.i.d standard Gaussian entries. We choose an index set $I$ of size $k$ at random and define the sparse original signal $\xorig\in \R^{n\times 2}$ by setting $\xorig(I,:) = [ u_1, u_2 ]$ and $\xorig(\bar{I},:) = 0$. We then let $b = A\xorig + 0.005\hat{\epsilon}$ with $\hat{\epsilon}_{i,j}$ independently following the Cauchy$(0, 1)$ distribution, $i=1, 2, \cdots n$, $j = 1, 2$, i.e., $\hat{\epsilon}_{i,j} = \tan(\pi(\widetilde{\epsilon}_{i,j} - \frac{1}{2}))$, where $\widetilde{\epsilon}_{\cdot, 1}\in\R^p$ and $\widetilde{\epsilon}_{\cdot, 2}\in\R^p$ are two random vectors with i.i.d entries uniformly chosen in $[0, 1]$. Finally, we set $\overline{\sigma} = 1.2\|0.005\hat{\epsilon}\|_{LL_2,\gamma}$ with $\gamma = 0.05$.}
 
 %We also compare the Algorithm~\ref{SQP_retract2} with ESQM$_{\rm ls}$ in \cite{Au13} as shown in Algorithm~\ref{ESQM} with $m = 1$, $P_1(x) = \|x\|_1$, $P_2(x) = \mu\|x\|$, $g_1(x) = \|Ax - b\|_{LL_2,\gamma} - \overline{\sigma}$, and $C = \{x\in\R^n:\; \|x\|_{\infty} \leq M_1\}$. We initialize two Algorithms at $x^0$ (see \eqref{initia1}) and terminate two Algorithms when \eqref{termination2} is satisfied.
 
-In our numerical experiments, we let $\mu =0.95$, $\gamma = 0.05$, $(p,n,k) = (720i,2560i,120i)$ with $i\in \{2, 4, 6, 8, 10\}$. For each $i$, we generate 30 random instances as described above. The computational results averaged over the $30$ random instances are shown in Table~\ref{table2}. In the table, Algorithm~\ref{SQP_retract2} is denoted by FPA$_{\rm retract}$, Algorithm~\ref{ESQM} with different $\delta$ is denoted by ESQM$_{\rm ls}$ with the $\delta$ specified, and recall that SPGL1 is the algorithm used for obtaining initial points for FPA$_{\rm retract}$ and ESQM$_{\rm ls}$ by solving the auxiliary problem~\eqref{SPGL1nonconvexL1}. As before, we present the time for performing QR decomposition on $A^T$ (denoted by QR), the time for computing $A^\dagger b$ given the QR factorization of $A^T$ (denoted by Slater), the CPU time of algorithms (CPU time),\footnote{The reported CPU times of FPA$_{\rm retract}$ and ESQM$_{\rm ls}$ do not include the time for generating $\xfeasss$ and $x^0$.} the number of iterations (denoted by Iter), the recovery errors $\text{RecErr} := \frac{\|x^* - \xorig\|}{\max\{1, \|\xorig\|\}}$ and the residuals ${\rm Residual} := \frac{\|Ax^* - b\|_{LL_2,\gamma} - \overline{\sigma} }{\overline{\sigma}}$, where $x^*$ is the approximate solution returned by the respective algorithm.
+In our numerical experiments, we let $\mu =0.95$, $j = 2$, $\gamma = 0.05$, $(p,n,k) = (360i,1280i,60i)$ with $i\in \{2, 4, 6, 8, 10\}$. For each $i$, we generate 20 random instances as described above. The computational results averaged over the $20$ random instances are shown in Table~\ref{table2}. In the table, Algorithm~\ref{SQP_retract2} is denoted by FPA$_{\rm retract}$, Algorithm~\ref{ESQM} with different $\delta$ is denoted by ESQM$_{\rm ls}$ with the $\delta$ specified, and recall that SPGL1 is the algorithm used for obtaining initial points for FPA$_{\rm retract}$ and ESQM$_{\rm ls}$ by solving the auxiliary problem~\eqref{SPGL1nonconvexL1}. As before, we present the time for performing QR decomposition on $A^T$ (denoted by QR), the time for computing $A^\dagger b$ given the QR factorization of $A^T$ (denoted by Slater), the CPU time of algorithms (CPU time),\footnote{The reported CPU times of FPA$_{\rm retract}$ and ESQM$_{\rm ls}$ do not include the time for generating $\xfeasss$ and $x^0$.} the number of iterations (denoted by Iter), the recovery errors $\text{RecErr} := \frac{\|x^* - \xorig\|}{\max\{1, \|\xorig\|\}}$ and the residuals ${\rm Residual} := \frac{\|Ax^* - b\|_{LL_2,\gamma} - \overline{\sigma} }{\overline{\sigma}}$, where $x^*$ is the approximate solution returned by the respective algorithm.
 
 From Table~\ref{table2}, one can see that the recovery errors of FPA$_{\rm retract}$ and ESQM$_{\rm ls}$ are comparable, and FPA$_{\rm retract}$ is usually faster, except for the case when $i = 10$.
 Indeed, we observe that the performance of FPA$_{\rm retract}$ can be quite sensitive to the ``quality" of the initial point (reflected partly by the RecErr of the approximate solution returned by SPGL1).
@@ -1115,27 +1122,27 @@ Indeed, we observe that the performance of FPA$_{\rm retract}$ can be quite sens
 \begin{tabular}{|c|c|c|c|c|c|c|}\hline
 \phantom{\diagbox{Date}{$i$}} & \multicolumn{1}{|c|}{Method} & \multicolumn{1}{|c|}{$i = 2$} & \multicolumn{1}{c|}{ $i = 4$ } & \multicolumn{1}{c|}{ $i = 6$ } & \multicolumn{1}{|c|}{ $i = 8$ } & \multicolumn{1}{c|}{ $i = 10$ }\\\cline{1-7}
 \multirow{7}*{CPU time} & \multirow{1}*{QR}
-&   0.47 &   2.74 &   8.44 &  19.76 &  34.84 \\\cline{2-2} \multirow{1}*{} & \multirow{1}*{Slater}
-&   0.01 &   0.02 &   0.06 &   0.11 &   0.17 \\\cline{2-2} \multirow{1}*{} & \multirow{1}*{SPGL1}
-&   3.33 &  34.28 &  22.86 & 115.25 & 448.76 \\\cline{2-7} \multirow{1}*{} & \multirow{1}*{FPA$_{\rm retract}$}
-&   3.81 &  37.06 &  32.67 &  86.09 & 348.70 \\\cline{2-2} \multirow{1}*{} & \multirow{1}*{ESQM$_{{\rm ls},\ \delta = 0.5}$}
-&  14.61 &  55.86 & 112.05 & 147.91 & 156.94 \\\cline{2-2} \multirow{1}*{} & \multirow{1}*{ESQM$_{{\rm ls},\ \delta = 0.1}$}
-&  14.81 &  58.42 & 113.59 & 174.21 & 262.91 \\\cline{2-2} \multirow{1}*{} & \multirow{1}*{ESQM$_{{\rm ls},\ \delta = 0.02}$}
-&  15.81 &  69.81 & 147.10 & 269.71 & 382.25 \\\cline{1-7} \multirow{4}*{Iter} & \multirow{1}*{FPA$_{\rm retract}$}
-&    579 &   1368 &    545 &    821 &   2090 \\\cline{2-2} \multirow{1}*{}     & \multirow{1}*{ESQM$_{{\rm ls},\ \delta = 0.5}$}
-&   2637 &   2593 &   2387 &   1809 &   1210 \\\cline{2-2} \multirow{1}*{}     & \multirow{1}*{ESQM$_{{\rm ls},\ \delta = 0.1}$}
-&   2671 &   2714 &   2417 &   2129 &   2028 \\\cline{2-2} \multirow{1}*{}     & \multirow{1}*{ESQM$_{{\rm ls},\ \delta = 0.02}$}
-&   2859 &   3248 &   3135 &   3297 &   2947 \\\cline{1-7} \multirow{5}*{RecErr} & \multirow{1}*{SPGL1}
-&  1.695 &  1.980 &  1.687 &  2.130 &  3.999 \\\cline{2-7} \multirow{1}*{}& \multirow{1}*{FPA$_{\rm retract}$}
-&  0.071 &  0.072 &  0.075 &  0.074 &  0.074 \\\cline{2-2} \multirow{1}*{}& \multirow{1}*{ESQM$_{{\rm ls},\ \delta = 0.5}$}
-&  0.071 &  0.072 &  0.075 &  0.074 &  0.074 \\\cline{2-2} \multirow{1}*{}& \multirow{1}*{ESQM$_{{\rm ls},\ \delta = 0.1}$}
-&  0.071 &  0.072 &  0.075 &  0.074 &  0.074 \\\cline{2-2} \multirow{1}*{}& \multirow{1}*{ESQM$_{{\rm ls},\ \delta = 0.02}$}
-&  0.071 &  0.072 &  0.075 &  0.074 &  0.074 \\\cline{1-7} \multirow{5}*{Residual} & \multirow{1}*{SPGL1}
-& -5.44e-01 & -5.49e-01 & -6.52e-01 & -7.20e-01 & -7.53e-01 \\\cline{2-7} \multirow{1}*{} & \multirow{1}*{FPA$_{\rm retract}$}
-& -1.27e-12 & -1.61e-12 & -1.37e-12 & -1.10e-12 & -1.08e-12 \\\cline{2-2} \multirow{1}*{} & \multirow{1}*{ESQM$_{{\rm ls},\ \delta = 0.5}$}
-& 2.33e-11 & 1.96e-11 & 7.79e-11 & 7.00e-11 & 7.66e-11 \\\cline{2-2} \multirow{1}*{}      & \multirow{1}*{ESQM$_{{\rm ls},\ \delta = 0.1}$}
-& 1.88e-11 & 2.11e-11 & 3.16e-11 & 2.42e-11 & 2.19e-11 \\\cline{2-2} \multirow{1}*{}      & \multirow{1}*{ESQM$_{{\rm ls},\ \delta = 0.02}$}
-& 1.70e-11 & 1.34e-11 & 1.44e-11 & 1.47e-11 & 1.82e-11 \\\cline{1-7}
+&   0.63 &   4.27 &  11.15 &  24.66 &  51.66 \\\cline{2-2} \multirow{1}*{} & \multirow{1}*{Slater}
+&   0.01 &   0.03 &   0.05 &   0.10 &   0.15 \\\cline{2-2} \multirow{1}*{} & \multirow{1}*{SPGL1}
+&   1.18 &  11.16 &  34.97 &  43.14 &  95.33 \\\cline{2-7} \multirow{1}*{} & \multirow{1}*{FPA$_{\rm retract}$}
+&   3.64 &  15.43 &  34.70 &  46.92 &  88.78 \\\cline{2-2} \multirow{1}*{} & \multirow{1}*{ESQM$_{{\rm ls},\ \delta = 0.5}$}
+&  13.62 &  34.03 &  41.46 &  59.36 &  57.94 \\\cline{2-2} \multirow{1}*{} & \multirow{1}*{ESQM$_{{\rm ls},\ \delta = 0.1}$}
+&  15.86 &  47.38 &  57.92 &  80.34 & 132.93 \\\cline{2-2} \multirow{1}*{} & \multirow{1}*{ESQM$_{{\rm ls},\ \delta = 0.02}$}
+&  17.33 &  59.84 & 111.44 & 181.45 & 208.90 \\\cline{1-7} \multirow{4}*{Iter} & \multirow{1}*{FPA$_{\rm retract}$}
+&    224 &    363 &    410 &    340 &    424 \\\cline{2-2} \multirow{1}*{}     & \multirow{1}*{ESQM$_{{\rm ls},\ \delta = 0.5}$}
+&   1423 &   1125 &    670 &    570 &    366 \\\cline{2-2} \multirow{1}*{}     & \multirow{1}*{ESQM$_{{\rm ls},\ \delta = 0.1}$}
+&   1655 &   1563 &    939 &    787 &    866 \\\cline{2-2} \multirow{1}*{}     & \multirow{1}*{ESQM$_{{\rm ls},\ \delta = 0.02}$}
+&   1820 &   2001 &   1841 &   1832 &   1365 \\\cline{1-7} \multirow{5}*{RecErr} & \multirow{1}*{SPGL1}
+&  0.867 &  1.490 &  1.806 &  1.360 &  1.768 \\\cline{2-7} \multirow{1}*{}& \multirow{1}*{FPA$_{\rm retract}$}
+&  0.048 &  0.051 &  0.052 &  0.052 &  0.052 \\\cline{2-2} \multirow{1}*{}& \multirow{1}*{ESQM$_{{\rm ls},\ \delta = 0.5}$}
+&  0.048 &  0.051 &  0.052 &  0.052 &  0.052 \\\cline{2-2} \multirow{1}*{}& \multirow{1}*{ESQM$_{{\rm ls},\ \delta = 0.1}$}
+&  0.048 &  0.051 &  0.052 &  0.052 &  0.052 \\\cline{2-2} \multirow{1}*{}& \multirow{1}*{ESQM$_{{\rm ls},\ \delta = 0.02}$}
+&  0.048 &  0.051 &  0.052 &  0.052 &  0.052 \\\cline{1-7} \multirow{5}*{Residual} & \multirow{1}*{SPGL1}
+& -5.23e-01 & -6.27e-01 & -6.81e-01 & -6.56e-01 & -7.32e-01 \\\cline{2-7} \multirow{1}*{} & \multirow{1}*{FPA$_{\rm retract}$}
+& -2.88e-12 & -2.41e-12 & -2.42e-12 & -2.41e-12 & -2.17e-12 \\\cline{2-2} \multirow{1}*{} & \multirow{1}*{ESQM$_{{\rm ls},\ \delta = 0.5}$}
+& 3.88e-11 & 6.21e-11 & 1.42e-10 & 1.16e-10 & 2.90e-10 \\\cline{2-2} \multirow{1}*{}      & \multirow{1}*{ESQM$_{{\rm ls},\ \delta = 0.1}$}
+& 4.15e-11 & 6.45e-11 & 1.26e-10 & 6.73e-11 & 6.65e-11 \\\cline{2-2} \multirow{1}*{}      & \multirow{1}*{ESQM$_{{\rm ls},\ \delta = 0.02}$}
+& 3.11e-11 & 2.71e-11 & 3.73e-11 & 4.77e-11 & 7.86e-11 \\\cline{1-7}
 \end{tabular}
 }
 \end{center}
@@ -1180,7 +1187,7 @@ T(\lambda) := r- \sum_{J\in\mathcal{J}} \min\left\{\max\left\{1 - \frac{\beta}{\
 \end{equation}
 The solution $x^*$ can then be recovered via \eqref{solution1}. In our implementation, we apply Newton's method to find a root of $T$. Specifically, we follow the framework of Newton's method described in \cite{SoSv98} (see the algorithmic description in \cite[Algorithm~2.1]{SoSv98}).\footnote{Follow the notation in \cite[Algorithm~2.1]{SoSv98}, we set $\beta = \frac{1}{2}$, $\lambda = 10^{-4}$, and choose $G_k$ from the generalized Jacobian of $T$ at $\lambda_k$, $\mu_k = 10^{-4}\|T(\lambda_k)\|^{\frac{1}{2}}$ and $\rho_k = 0$ at each iteration $k$.} At iteration $k = 0$, we initialize the Newton's method at $\lambda = 0$, and at each subsequent iteration, we warm-start this algorithm using the $\lambda$ obtained in the previous iteration; we terminate the Newton's method when the approximate solution $\lambda_*$ satisfies $\|T(\lambda_*)\| \le 10^{-10}$. Moreover, as a safeguard, we also terminate when stepsizes are small: Specifically, we terminate the algorithm when the stepsize $\alpha_k$ in \cite[Algorithm~2.1]{SoSv98} falls below $10^{-10}$.
 
-Finally, for \eqref{E4}, notice that the $\ell_1$ norm can be viewed as a special case of the group LASSO penalty function when each group has size 1. We can hence use a procedure similar to the one described above for solving the associated subproblem, and we use the same parameter settings as above when invoking the Newton's method.
+% Finally, for \eqref{E4}, notice that the $\ell_1$ norm can be viewed as a special case of the group LASSO penalty function when each group has size 1. We can hence use a procedure similar to the one described above for solving the associated subproblem, and we use the same parameter settings as above when invoking the Newton's method.
 
 \subsection{Solving the subproblems in ESQM$_{\rm ls}$ for \eqref{E3} and \eqref{E4}}
 The subproblem \eqref{subproblemhaha} (with $m = 1$) takes the following form:
@@ -1203,7 +1210,7 @@ Note that the first inclusion in \eqref{subKKT11} is equivalent to \eqref{soluti
   \item If $\lambda_* = 0$ or $\lambda_* = \frac{1}{\beta}$, {\color{blue} we }can obtain the optimal solution $x^*$ from \eqref{solution1};
   \item If $0< \lambda_* < \frac{1}{\beta}$, then $s_* = 0$. In this case, \eqref{subKKT22} become $\lambda_*(\langle a, x^*\rangle - r)=0$, which is the same as \eqref{subKKT2} in Section~\ref{sec:append1}. The $\lambda_*$ is then obtained as a root of $T$ in \eqref{G}, and we find it using the Newton's method with the same parameter settings used in Section~\ref{sec:append1}. The $x^*$ is then recovered via \eqref{solution1}.
 \end{itemize}
-Finally, for \eqref{E4}, as discussed in the end of Section~\ref{sec:append1}, the associated subproblem can be solved via procedures similar to those outlined above.
+% Finally, for \eqref{E4}, as discussed in the end of Section~\ref{sec:append1}, the associated subproblem can be solved via procedures similar to those outlined above.
 
 
 
