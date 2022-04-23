@@ -980,13 +980,13 @@ where $A\in\R^{2p\times 2n}$ and $b\in \R^{2p}$ are given in \eqref{defineAb}, $
 Although the feasible region of \eqref{E2} is unbounded and is not a special case of \eqref{P1}, one can argue as in the discussion following \eqref{E3} that \eqref{E2} is equivalent to the following model:
 \begin{equation}\label{E4}
   \begin{array}{rl}
-\min\limits_{x\in\R^n} & \sum\limits_{J\in\mathcal{J}}\|x_J\| - \mu\|x\| \\
+\min\limits_{x\in\R^{2n}} & \sum\limits_{J\in\mathcal{J}}\|x_J\| - \mu\|x\| \\
 {\rm s.t.} & \|Ax - b\|_{LL_2,\gamma}\leq \overline{\sigma},\\
-           & \|x\|_{\infty} \leq M_1
+           & \max\limits_{J\in \mathcal{J}}\|x_J\| \leq M_1
   \end{array}
 \end{equation}
 as long as $M_1 \ge (1 - \mu)^{-1}[\sum\limits_{J\in\mathcal{J}}\|(A^\dagger b)_J\| - \mu\|A^\dagger b\|]$.
-Notice that \eqref{E4} is a special case of \eqref{P1} with $P_1(x) = \sum\limits_{J\in\mathcal{J}}\|x_J\|$, $P_2(x) = \mu\|x\|$,  $\sigma=\overline{\sigma}$, $\ell(y) = \|y\|_{LL_2,\gamma}$, and $C = \{x\in\R^n:\; \|x\|_{\infty} \leq M_1\}$. One can see  from Example \ref{Loren} that Assumption~\ref{gassum} is satisfied for \eqref{E4}, and Assumption~\ref{assumption4} is satisfied for \eqref{E4} with $\xfeasss = A^\dagger b$. Hence, we can apply Algorithm \ref{SQP_retract2} to \eqref{E4}. In our numerical experiments below, we will be solving random instances of \eqref{E2} with $M_1 = (1 - \mu)^{-1}[\sum\limits_{J\in\mathcal{J}}\|(A^\dagger b)_J\| - \mu\|A^\dagger b\|]$. }
+Notice that \eqref{E4} is a special case of \eqref{P1} with $P_1(x) = \sum\limits_{J\in\mathcal{J}}\|x_J\|$, $P_2(x) = \mu\|x\|$,  $\sigma=\overline{\sigma}$, $\ell(y) = \|y\|_{LL_2,\gamma}$, and $C = \{x\in\R^{2n}:\; \max\limits_{J\in \mathcal{J}}\|x_J\| \leq M_1\}$. One can see  from Example \ref{Loren} that Assumption~\ref{gassum} is satisfied for \eqref{E4}, and Assumption~\ref{assumption4} is satisfied for \eqref{E4} with $\xfeasss = A^\dagger b$. Hence, we can apply Algorithm \ref{SQP_retract2} to \eqref{E4}. In our numerical experiments below, we will be solving random instances of \eqref{E2} with $M_1 = (1 - \mu)^{-1}[\sum\limits_{J\in\mathcal{J}}\|(A^\dagger b)_J\| - \mu\|A^\dagger b\|]$. }
 
 \subsection{Numerical results}
 In this subsection, we perform numerical experiments to study the performance of Algorithm~\ref{SQP_retract} on solving \eqref{E3} and that of Algorithm~\ref{SQP_retract2} on solving \eqref{E4}.
