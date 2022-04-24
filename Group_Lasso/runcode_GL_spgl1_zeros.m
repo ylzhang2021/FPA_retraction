@@ -185,7 +185,7 @@ for h = 1 : lensize
         fprintf(' ESQM_0.02 Termination: iter = %d, time = %g, nnz = %g, fval = %16.10f, feas vio = %g, diff = %g,\n',...
             iter_esqm3, t_esqm3, nnz_esqm3, fval_esqm3, Residual_esqm3, RecErr_esqm3)
         
-        table2 = [table2; t_qr, t_slater, t_spgl1, t_sqp, t_esqm1, t_esqm2, t_esqm3,  iter_sqp, iter_esqm1, iter_esqm2, iter_esqm3,...
+        table2 = [table2; t_qr, t_slater, t_spgl1, t_sqp, 0, t_esqm1, t_esqm2, t_esqm3,  iter_sqp, iter_esqm1, iter_esqm2, iter_esqm3,...
             RecErr_spgl1, RecErr_sqp, RecErr_esqm1, RecErr_esqm2, RecErr_esqm3, Residual_spgl1, Residual_sqp, Residual_esqm1, Residual_esqm2, Residual_esqm3];
         
     end
@@ -197,23 +197,26 @@ end
 % Save the results as columns
 table1 = table1';
 
+% Calculat slater+spgl1+FPA
+table1(5, :) = table1(2, :) + table1(3, :) + table1 (4, :);
+
 a = clock;
-fname = ['Results\GL_table_spgl1_zeros' '-'  date '-' int2str(a(4)) '-' int2str(a(5)) '.txt'];
+fname = ['Results\GL_table_spgl1_zeros_sum' '-'  date '-' int2str(a(4)) '-' int2str(a(5)) '.txt'];
 fid = fopen(fname, 'w');
 
-for ii = 1:7
+for ii = 1:8
     fprintf(fid, '& %6.2f & %6.2f & %6.2f & %6.2f & %6.2f\n', table1(ii,:));
 end
-for ii = 8:11
+for ii = 9:12
     fprintf(fid, '& %6.0f & %6.0f & %6.0f & %6.0f & %6.0f\n', table1(ii,:));
 end
-for ii = 12:16
+for ii = 13:17
    fprintf(fid, '& %6.3f & %6.3f & %6.3f & %6.3f & %6.3f\n', table1(ii,:));
 end
-for ii = 17:21
+for ii = 18:22
     fprintf(fid, '& %3.2e & %3.2e & %3.2e & %3.2e & %3.2e\n', table1(ii,:)); 
 end
-for ii = 22:25
+for ii = 23:26
     fprintf(fid, '& %6.0f & %6.0f & %6.0f & %6.0f & %6.0f\n', table1(ii,:)); 
 end
 fclose(fid);
