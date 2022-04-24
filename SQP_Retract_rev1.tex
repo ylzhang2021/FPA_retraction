@@ -1177,13 +1177,13 @@ Indeed, we observe that the performance of FPA$_{\rm retract}$ can be quite sens
 \begin{tabular}{|c|c|c|c|c|c|c|}\hline
 \phantom{\diagbox{Date}{$i$}} & \multicolumn{1}{|c|}{Method} & \multicolumn{1}{|c|}{$i = 2$} & \multicolumn{1}{c|}{ $i = 4$ } & \multicolumn{1}{c|}{ $i = 6$ } & \multicolumn{1}{|c|}{ $i = 8$ } & \multicolumn{1}{c|}{ $i = 10$ }\\\cline{1-7}
 \multirow{7}*{CPU time} & \multirow{1}*{QR}
-&   0.63 &   4.27 &  11.15 &  24.66 &  51.66 \\\cline{2-2} \multirow{1}*{} & \multirow{1}*{Slater}
-&   0.01 &   0.03 &   0.05 &   0.10 &   0.15 \\\cline{2-2} \multirow{1}*{} & \multirow{1}*{SPGL1}
-&   1.18 &  11.16 &  34.97 &  43.14 &  95.33 \\\cline{2-7} \multirow{1}*{} & \multirow{1}*{FPA$_{\rm retract}$}
-&   3.64 &  15.43 &  34.70 &  46.92 &  88.78 \\\cline{2-2} \multirow{1}*{} & \multirow{1}*{ESQM$_{{\rm ls},\ \delta = 0.5}$}
-&  13.62 &  34.03 &  41.46 &  59.36 &  57.94 \\\cline{2-2} \multirow{1}*{} & \multirow{1}*{ESQM$_{{\rm ls},\ \delta = 0.1}$}
-&  15.86 &  47.38 &  57.92 &  80.34 & 132.93 \\\cline{2-2} \multirow{1}*{} & \multirow{1}*{ESQM$_{{\rm ls},\ \delta = 0.02}$}
-&  17.33 &  59.84 & 111.44 & 181.45 & 208.90 \\\cline{1-7} \multirow{4}*{Iter} & \multirow{1}*{FPA$_{\rm retract}$}
+&   0.66 &   4.47 &  10.60 &  24.42 &  48.88 \\\cline{2-2} \multirow{1}*{} & \multirow{1}*{Slater}
+&   0.01 &   0.03 &   0.06 &   0.10 &   0.16 \\\cline{2-2} \multirow{1}*{} & \multirow{1}*{SPGL1}
+&   1.19 &  10.52 &  34.51 &  43.19 &  96.20 \\\cline{2-7} \multirow{1}*{} & \multirow{1}*{FPA$_{\rm retract}$}
+&   3.78 &  15.41 &  34.30 &  46.57 &  88.61 \\\cline{2-2} \multirow{1}*{} & \multirow{1}*{ESQM$_{{\rm ls},\ \delta = 0.5}$}
+&  14.12 &  33.73 &  40.94 &  59.08 &  57.88 \\\cline{2-2} \multirow{1}*{} & \multirow{1}*{ESQM$_{{\rm ls},\ \delta = 0.1}$}
+&  16.35 &  46.14 &  57.13 &  80.28 & 132.99 \\\cline{2-2} \multirow{1}*{} & \multirow{1}*{ESQM$_{{\rm ls},\ \delta = 0.02}$}
+&  19.57 &  59.13 & 109.96 & 181.23 & 210.94 \\\cline{1-7} \multirow{4}*{Iter} & \multirow{1}*{FPA$_{\rm retract}$}
 &    224 &    363 &    410 &    340 &    424 \\\cline{2-2} \multirow{1}*{}     & \multirow{1}*{ESQM$_{{\rm ls},\ \delta = 0.5}$}
 &   1423 &   1125 &    670 &    570 &    366 \\\cline{2-2} \multirow{1}*{}     & \multirow{1}*{ESQM$_{{\rm ls},\ \delta = 0.1}$}
 &   1655 &   1563 &    939 &    787 &    866 \\\cline{2-2} \multirow{1}*{}     & \multirow{1}*{ESQM$_{{\rm ls},\ \delta = 0.02}$}
@@ -1193,11 +1193,11 @@ Indeed, we observe that the performance of FPA$_{\rm retract}$ can be quite sens
 &  0.048 &  0.051 &  0.052 &  0.052 &  0.052 \\\cline{2-2} \multirow{1}*{}& \multirow{1}*{ESQM$_{{\rm ls},\ \delta = 0.1}$}
 &  0.048 &  0.051 &  0.052 &  0.052 &  0.052 \\\cline{2-2} \multirow{1}*{}& \multirow{1}*{ESQM$_{{\rm ls},\ \delta = 0.02}$}
 &  0.048 &  0.051 &  0.052 &  0.052 &  0.052 \\\cline{1-7} \multirow{5}*{Residual} & \multirow{1}*{SPGL1}
-& -5.23e-01 & -6.27e-01 & -6.81e-01 & -6.56e-01 & -7.32e-01 \\\cline{2-7} \multirow{1}*{} & \multirow{1}*{FPA$_{\rm retract}$}
-& -2.88e-12 & -2.41e-12 & -2.42e-12 & -2.41e-12 & -2.17e-12 \\\cline{2-2} \multirow{1}*{} & \multirow{1}*{ESQM$_{{\rm ls},\ \delta = 0.5}$}
-& 3.88e-11 & 6.21e-11 & 1.42e-10 & 1.16e-10 & 2.90e-10 \\\cline{2-2} \multirow{1}*{}      & \multirow{1}*{ESQM$_{{\rm ls},\ \delta = 0.1}$}
-& 4.15e-11 & 6.45e-11 & 1.26e-10 & 6.73e-11 & 6.65e-11 \\\cline{2-2} \multirow{1}*{}      & \multirow{1}*{ESQM$_{{\rm ls},\ \delta = 0.02}$}
-& 3.11e-11 & 2.71e-11 & 3.73e-11 & 4.77e-11 & 7.86e-11 \\\cline{1-7}
+& -5.23e-01 & -6.27e-01 & -6.81e-01 & -6.56e-01 & -7.32e-01\\\cline{2-7} \multirow{1}*{} & \multirow{1}*{FPA$_{\rm retract}$}
+& -2.88e-12 & -2.41e-12 & -2.42e-12 & -2.41e-12 & -2.17e-12\\\cline{2-2} \multirow{1}*{} & \multirow{1}*{ESQM$_{{\rm ls},\ \delta = 0.5}$}
+& 3.88e-11 & 6.21e-11 & 1.42e-10 & 1.16e-10 & 2.90e-10\\\cline{2-2} \multirow{1}*{}      & \multirow{1}*{ESQM$_{{\rm ls},\ \delta = 0.1}$}
+& 4.15e-11 & 6.45e-11 & 1.26e-10 & 6.73e-11 & 6.65e-11\\\cline{2-2} \multirow{1}*{}      & \multirow{1}*{ESQM$_{{\rm ls},\ \delta = 0.02}$}
+& 3.11e-11 & 2.71e-11 & 3.73e-11 & 4.77e-11 & 7.86e-11\\\cline{1-7}
 \end{tabular}
 }
 \end{center}
