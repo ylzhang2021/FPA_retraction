@@ -87,83 +87,122 @@ which is a quadratic function in $\tau$. One can then obtain a closed form formu
 
 	\item  \textit{\textbf{Reviewer:}} \textit{Numerical results: As far as I see, Algorithm 3 does not require to find a completely feasible initial point ($x_0\in F$) but just in C ($x_0\in C$). I did not find any statement about how the initial point is chosen for ESQM$_{\rm ls}$. In principle, SPGL1 and Slater point are not needed. Therefore, it is not fair to say that FPA is faster since the sum of the iteration time plus the required initialization exceeds the CPU time of ESQM$_{\rm ls}$. Would it be any other cheaper way to compute $x_0$?}
 	
-	\textbf{Response:} Thanks for the comment. Following your comment, we explore the effect of the choice of initial points for the two algorithms in solving (6.1). 
+	\textbf{Response:} Thanks for the comment. Following your comment, we explore the effect of the choice of initial points for the two algorithms in solving (6.2).
 
 Table 1 below shows the computational results when the initial points for the ESQMs are chosen as
-$x^0 = (0, 0, \cdots, 0)$. Although ESQM$_{\rm ls}$ becomes faster when the initial point is zero, FPA$_{\rm retract}$ with initial point chosen in (6.6) still seems to be faster than ESQM$_{\rm ls}$ with zero initial point.
+$x^0 = (0, 0, \cdots, 0)$ and the initial points for the FPA$_{\rm retract}$ is chosen as (6.6). From Table 1, one can see that 
+the recovery errors of FPA$_{\rm retract}$ and ESQM$_{\rm ls}$ are comparable, and the sum time of generated a Slter Point, SPGL1 and FPA$_{\rm retract}$ is comparable to the time of ESQM$_{\rm ls}$.
+                                                                  
+%Although ESQM$_{\rm ls}$ becomes faster when the initial point is zero, FPA$_{\rm retract}$ with initial point chosen in (6.6) still seems to be faster than ESQM$_{\rm ls}$ with zero initial point.
 
-{\color{red} TK: Why is FPA also using zero initial point? That does not make any sense. Don't we need feasible starting points?
+%{\color{red} TK: Why is FPA also using zero initial point? That does not make any sense. Don't we need feasible starting points?
 
-We only need ONE table, I think: ESQM with zero initial point and our method with our suggested initial point. Please re-do the table.}
+% We only need ONE table, I think: ESQM with zero initial point and our method with our suggested initial point. Please re-do the table.}
 
 \begin{table}[H]
-\caption{Computational results for problem (6.2) with initial point $x^0 = (0, 0, \cdots, 0)$ for ESQM}\label{table1}
+\caption{Computational results for problem (6.2) with initial point $x^0 = (0, 0, \cdots, 0)$ for ESQM 
+and the initial points for the FPA$_{\rm retract}$ is chosen as (6.6).}\label{table1}
 \begin{center}
 {\footnotesize
 \begin{tabular}{|c|c|c|c|c|c|c|}\hline
 \phantom{\diagbox{Date}{$i$}} & \multicolumn{1}{|c|}{Method} & \multicolumn{1}{|c|}{$i = 2$} & \multicolumn{1}{c|}{ $i = 4$ } & \multicolumn{1}{c|}{ $i = 6$ } & \multicolumn{1}{|c|}{ $i = 8$ } & \multicolumn{1}{c|}{ $i = 10$ }\\\cline{1-7}
 \multirow{7}*{CPU time} & \multirow{1}*{QR}
-&   0.50 &   3.11 &   9.79 &  22.95 &  43.99\\\cline{2-2} \multirow{1}*{} & \multirow{1}*{Slater}
-&   0.01 &   0.02 &   0.05 &   0.09 &   0.15\\\cline{2-2} \multirow{1}*{} & \multirow{1}*{SPGL1}
-&   1.38 &   7.54 &  15.69 &  28.50 &  50.25\\\cline{2-7} \multirow{1}*{} & \multirow{1}*{FPA$_{\rm retract}$}
-&  14.09 &  62.33 & 139.27 & 241.40 & 388.70\\\cline{2-2} \multirow{1}*{}  & \multirow{1}*{ESQM$_{{\rm ls},\ \delta = 0.5}$}
-&   4.92 &  25.75 &  59.09 & 102.56 & 170.23\\\cline{2-2} \multirow{1}*{}  & \multirow{1}*{ESQM$_{{\rm ls},\ \delta = 0.1}$}
-&   4.42 &  21.80 &  49.89 &  86.37 & 142.02\\\cline{2-2} \multirow{1}*{}  & \multirow{1}*{ESQM$_{{\rm ls},\ \delta = 0.02}$}
-&  13.36 &  59.88 & 135.25 & 236.76 & 378.49\\\cline{1-7} \multirow{4}*{Iter} & \multirow{1}*{FPA$_{\rm retract}$}
-&   1638 &   1847 &   1885 &   1883 &   1957\\\cline{2-2} \multirow{1}*{}     & \multirow{1}*{ESQM$_{{\rm ls},\ \delta = 0.5}$}
-&    759 &   1025 &   1075 &   1080 &   1158\\\cline{2-2} \multirow{1}*{}     & \multirow{1}*{ESQM$_{{\rm ls},\ \delta = 0.1}$}
-&    767 &    913 &    946 &    941 &    991\\\cline{2-2} \multirow{1}*{}     & \multirow{1}*{ESQM$_{{\rm ls},\ \delta = 0.02}$}
-&   2439 &   2579 &   2618 &   2620 &   2670\\\cline{1-7} \multirow{5}*{RecErr} & \multirow{1}*{SPGL1}
-&  0.060 &  0.051 &  0.055 &  0.055 &  0.046\\\cline{2-7} \multirow{1}*{} & \multirow{1}*{FPA$_{\rm retract}$}
-&  0.030 &  0.034 &  0.035 &  0.034 &  0.036\\\cline{2-2} \multirow{1}*{} & \multirow{1}*{ESQM$_{{\rm ls},\ \delta = 0.5}$}
-&  0.030 &  0.034 &  0.035 &  0.034 &  0.036\\\cline{2-2} \multirow{1}*{} & \multirow{1}*{ESQM$_{{\rm ls},\ \delta = 0.1}$}
-&  0.030 &  0.034 &  0.035 &  0.034 &  0.036\\\cline{2-2} \multirow{1}*{} & \multirow{1}*{ESQM$_{{\rm ls},\ \delta = 0.02}$}
-&  0.030 &  0.034 &  0.035 &  0.034 &  0.036\\\cline{1-7} \multirow{5}*{Residual} & \multirow{1}*{SPGL1}
-& -1.72e-04 & -2.10e-04 & -1.53e-04 & -1.37e-04 & -1.26e-04\\\cline{2-7} \multirow{1}*{} & \multirow{1}*{FPA$_{\rm retract}$}
-& 1.69e-15 & 1.35e-15 & 2.79e-16 & -7.54e-16 & -1.42e-15\\\cline{2-2} \multirow{1}*{} & \multirow{1}*{ESQM$_{{\rm ls},\ \delta = 0.5}$}
-& 1.21e-10 & 1.22e-10 & 1.12e-10 & 1.10e-10 & 1.11e-10\\\cline{2-2} \multirow{1}*{}      & \multirow{1}*{ESQM$_{{\rm ls},\ \delta = 0.1}$}
-& 1.06e-10 & 9.98e-11 & 9.32e-11 & 9.36e-11 & 9.10e-11\\\cline{2-2} \multirow{1}*{}      & \multirow{1}*{ESQM$_{{\rm ls},\ \delta = 0.02}$}
-& 1.01e-10 & 9.93e-11 & 9.77e-11 & 9.47e-11 & 9.60e-11\\\cline{1-7}
+&   0.52 &   3.13 &   9.30 &  22.65 &  44.45\\\cline{2-7} \multirow{1}*{} & \multirow{1}*{Slater}
+&   0.01 &   0.03 &   0.05 &   0.09 &   0.15\\\cline{2-2} \multirow{1}*{} & \multirow{1}*{SPGL1}
+&   1.54 &   6.84 &  16.39 &  30.45 &  42.97\\\cline{2-2} \multirow{1}*{} & \multirow{1}*{FPA$_{\rm retract}$}
+&   3.01 &  13.54 &  29.17 &  53.66 & 105.66\\\cline{2-7} \multirow{1}*{}  & \multirow{1}*{Slater + SPGL1 + FPA$_{\rm retract}$}
+&   4.57 &  20.40 &  45.60 &  84.20 & 148.78\\\cline{2-2} \multirow{1}*{}  & \multirow{1}*{ESQM$_{{\rm ls},\ \delta = 0.5}$}
+&   5.13 &  24.23 &  56.41 & 105.38 & 173.96\\\cline{2-2} \multirow{1}*{}  & \multirow{1}*{ESQM$_{{\rm ls},\ \delta = 0.1}$}
+&   4.61 &  20.76 &  47.71 &  88.30 & 145.13\\\cline{2-2} \multirow{1}*{}  & \multirow{1}*{ESQM$_{{\rm ls},\ \delta = 0.02}$}
+&  13.91 &  59.10 & 134.39 & 241.26 & 386.69\\\cline{1-7} \multirow{4}*{Iter} & \multirow{1}*{FPA$_{\rm retract}$}
+&    342 &    406 &    398 &    418 &    533\\\cline{2-2} \multirow{1}*{}     & \multirow{1}*{ESQM$_{{\rm ls},\ \delta = 0.5}$}
+&    766 &    970 &   1027 &   1104 &   1175\\\cline{2-2} \multirow{1}*{}     & \multirow{1}*{ESQM$_{{\rm ls},\ \delta = 0.1}$}
+&    776 &    873 &    905 &    952 &   1002\\\cline{2-2} \multirow{1}*{}     & \multirow{1}*{ESQM$_{{\rm ls},\ \delta = 0.02}$}
+&   2446 &   2559 &   2593 &   2626 &   2682\\\cline{1-7} \multirow{5}*{RecErr} & \multirow{1}*{SPGL1}
+&  0.054 &  0.055 &  0.048 &  0.046 &  0.066\\\cline{2-7} \multirow{1}*{} & \multirow{1}*{FPA$_{\rm retract}$}
+&  0.030 &  0.033 &  0.033 &  0.035 &  0.036\\\cline{2-2} \multirow{1}*{} & \multirow{1}*{ESQM$_{{\rm ls},\ \delta = 0.5}$}
+&  0.030 &  0.033 &  0.033 &  0.035 &  0.036\\\cline{2-2} \multirow{1}*{} & \multirow{1}*{ESQM$_{{\rm ls},\ \delta = 0.1}$}
+&  0.030 &  0.033 &  0.033 &  0.035 &  0.036\\\cline{2-2} \multirow{1}*{} & \multirow{1}*{ESQM$_{{\rm ls},\ \delta = 0.02}$}
+&  0.030 &  0.033 &  0.033 &  0.035 &  0.036\\\cline{1-7} \multirow{5}*{Residual} & \multirow{1}*{SPGL1}
+& -2.01e-04 & -1.63e-04 & -1.87e-04 & -1.40e-04 & -9.35e-05\\\cline{2-7} \multirow{1}*{} & \multirow{1}*{FPA$_{\rm retract}$}
+& 5.89e-16 & 1.40e-15 & 5.99e-16 & 2.73e-15 & 1.05e-16\\\cline{2-2} \multirow{1}*{} & \multirow{1}*{ESQM$_{{\rm ls},\ \delta = 0.5}$}
+& 1.32e-10 & 1.10e-10 & 1.14e-10 & 1.13e-10 & 1.09e-10\\\cline{2-2} \multirow{1}*{}      & \multirow{1}*{ESQM$_{{\rm ls},\ \delta = 0.1}$}
+& 1.08e-10 & 9.93e-11 & 1.02e-10 & 9.59e-11 & 9.54e-11\\\cline{2-2} \multirow{1}*{}      & \multirow{1}*{ESQM$_{{\rm ls},\ \delta = 0.02}$}
+& 1.01e-10 & 9.83e-11 & 9.26e-11 & 9.35e-11 & 9.32e-11\\\cline{1-7}
 \end{tabular}
 }
 \end{center}
 \end{table}
 
 
-
-\begin{table}[H]
-\caption{Computational results for problem (6.2) with initial point $x^0$ is given as in (6.6) for all algorithms}\label{table1}
-\begin{center}
-{\footnotesize
-\begin{tabular}{|c|c|c|c|c|c|c|}\hline
-\phantom{\diagbox{Date}{$i$}} & \multicolumn{1}{|c|}{Method} & \multicolumn{1}{|c|}{$i = 2$} & \multicolumn{1}{c|}{ $i = 4$ }
-& \multicolumn{1}{c|}{ $i = 6$ } & \multicolumn{1}{|c|}{ $i = 8$ } & \multicolumn{1}{c|}{ $i = 10$ }\\\cline{1-7}
-\multirow{7}*{CPU time} & \multirow{1}*{QR}
-&   0.47 &   3.05 &   9.83 &  23.25 &  44.84\\\cline{2-2} \multirow{1}*{} & \multirow{1}*{Slater}
-&   0.01 &   0.02 &   0.05 &   0.09 &   0.15\\\cline{2-2} \multirow{1}*{} & \multirow{1}*{SPGL1}
-&   1.59 &   7.35 &  15.20 &  30.17 &  48.54\\\cline{2-7} \multirow{1}*{} & \multirow{1}*{FPA$_{\rm retract}$}
-&   3.40 &  12.30 &  37.94 &  56.91 &  97.89\\\cline{2-2} \multirow{1}*{}  & \multirow{1}*{ESQM$_{{\rm ls},\ \delta = 0.5}$}
-&   5.43 &  23.38 &  61.11 & 104.34 & 173.99\\\cline{2-2} \multirow{1}*{}  & \multirow{1}*{ESQM$_{{\rm ls},\ \delta = 0.1}$}
-&   4.64 &  20.41 &  51.46 &  88.36 & 146.46\\\cline{2-2} \multirow{1}*{}  & \multirow{1}*{ESQM$_{{\rm ls},\ \delta = 0.02}$}
-&  13.25 &  58.83 & 136.92 & 239.48 & 382.51\\\cline{1-7} \multirow{4}*{Iter} & \multirow{1}*{FPA$_{\rm retract}$}
-&    420 &    368 &    520 &    444 &    493\\\cline{2-2} \multirow{1}*{}     & \multirow{1}*{ESQM$_{{\rm ls},\ \delta = 0.5}$}
-&    893 &    937 &   1113 &   1099 &   1186\\\cline{2-2} \multirow{1}*{}     & \multirow{1}*{ESQM$_{{\rm ls},\ \delta = 0.1}$}
-&    839 &    863 &    977 &    963 &   1025\\\cline{2-2} \multirow{1}*{}     & \multirow{1}*{ESQM$_{{\rm ls},\ \delta = 0.02}$}
-&   2508 &   2550 &   2653 &   2650 &   2702\\\cline{1-7} \multirow{5}*{RecErr} & \multirow{1}*{SPGL1}
-&  0.061 &  0.045 &  0.066 &  0.051 &  0.054\\\cline{2-7} \multirow{1}*{} & \multirow{1}*{FPA$_{\rm retract}$}
-&  0.032 &  0.032 &  0.035 &  0.035 &  0.037\\\cline{2-2} \multirow{1}*{} & \multirow{1}*{ESQM$_{{\rm ls},\ \delta = 0.5}$}
-&  0.032 &  0.032 &  0.035 &  0.035 &  0.037\\\cline{2-2} \multirow{1}*{} & \multirow{1}*{ESQM$_{{\rm ls},\ \delta = 0.1}$}
-&  0.032 &  0.032 &  0.035 &  0.035 &  0.037\\\cline{2-2} \multirow{1}*{} & \multirow{1}*{ESQM$_{{\rm ls},\ \delta = 0.02}$}
-&  0.032 &  0.032 &  0.035 &  0.035 &  0.037\\\cline{1-7} \multirow{5}*{Residual} & \multirow{1}*{SPGL1}
-& -2.72e-04 & -2.20e-04 & -1.41e-04 & -1.19e-04 & -1.30e-04\\\cline{2-7} \multirow{1}*{} & \multirow{1}*{FPA$_{\rm retract}$}
-& -1.86e-16 & 2.98e-16 & 1.85e-15 & -5.27e-16 & -1.31e-15\\\cline{2-2} \multirow{1}*{} & \multirow{1}*{ESQM$_{{\rm ls},\ \delta = 0.5}$}
-& 1.08e-10 & 1.15e-10 & 1.01e-10 & 1.09e-10 & 1.05e-10\\\cline{2-2} \multirow{1}*{}      & \multirow{1}*{ESQM$_{{\rm ls},\ \delta = 0.1}$}
-& 9.49e-11 & 9.50e-11 & 8.90e-11 & 9.60e-11 & 9.95e-11\\\cline{2-2} \multirow{1}*{}      & \multirow{1}*{ESQM$_{{\rm ls},\ \delta = 0.02}$}
-& 9.35e-11 & 9.91e-11 & 9.14e-11 & 9.44e-11 & 9.34e-11\\\cline{1-7}
-\end{tabular}
-}
-\end{center}
-\end{table}
+%\begin{table}[H]
+%\caption{Computational results for problem (6.2) with initial point $x^0 = (0, 0, \cdots, 0)$ for ESQM}\label{table1}
+%\begin{center}
+%{\footnotesize
+%\begin{tabular}{|c|c|c|c|c|c|c|}\hline
+%\phantom{\diagbox{Date}{$i$}} & \multicolumn{1}{|c|}{Method} & \multicolumn{1}{|c|}{$i = 2$} & \multicolumn{1}{c|}{ $i = 4$ } & \multicolumn{1}{c|}{ $i = 6$ } & \multicolumn{1}{|c|}{ $i = 8$ } & \multicolumn{1}{c|}{ $i = 10$ }\\\cline{1-7}
+%\multirow{7}*{CPU time} & \multirow{1}*{QR}
+%&   0.50 &   3.11 &   9.79 &  22.95 &  43.99\\\cline{2-2} \multirow{1}*{} & \multirow{1}*{Slater}
+%&   0.01 &   0.02 &   0.05 &   0.09 &   0.15\\\cline{2-2} \multirow{1}*{} & \multirow{1}*{SPGL1}
+%&   1.38 &   7.54 &  15.69 &  28.50 &  50.25\\\cline{2-7} \multirow{1}*{} & \multirow{1}*{FPA$_{\rm retract}$}
+%&  14.09 &  62.33 & 139.27 & 241.40 & 388.70\\\cline{2-2} \multirow{1}*{}  & \multirow{1}*{ESQM$_{{\rm ls},\ \delta = 0.5}$}
+%&   4.92 &  25.75 &  59.09 & 102.56 & 170.23\\\cline{2-2} \multirow{1}*{}  & \multirow{1}*{ESQM$_{{\rm ls},\ \delta = 0.1}$}
+%&   4.42 &  21.80 &  49.89 &  86.37 & 142.02\\\cline{2-2} \multirow{1}*{}  & \multirow{1}*{ESQM$_{{\rm ls},\ \delta = 0.02}$}
+%&  13.36 &  59.88 & 135.25 & 236.76 & 378.49\\\cline{1-7} \multirow{4}*{Iter} & \multirow{1}*{FPA$_{\rm retract}$}
+%&   1638 &   1847 &   1885 &   1883 &   1957\\\cline{2-2} \multirow{1}*{}     & \multirow{1}*{ESQM$_{{\rm ls},\ \delta = 0.5}$}
+%&    759 &   1025 &   1075 &   1080 &   1158\\\cline{2-2} \multirow{1}*{}     & \multirow{1}*{ESQM$_{{\rm ls},\ \delta = 0.1}$}
+%&    767 &    913 &    946 &    941 &    991\\\cline{2-2} \multirow{1}*{}     & \multirow{1}*{ESQM$_{{\rm ls},\ \delta = 0.02}$}
+%&   2439 &   2579 &   2618 &   2620 &   2670\\\cline{1-7} \multirow{5}*{RecErr} & \multirow{1}*{SPGL1}
+%&  0.060 &  0.051 &  0.055 &  0.055 &  0.046\\\cline{2-7} \multirow{1}*{} & \multirow{1}*{FPA$_{\rm retract}$}
+%&  0.030 &  0.034 &  0.035 &  0.034 &  0.036\\\cline{2-2} \multirow{1}*{} & \multirow{1}*{ESQM$_{{\rm ls},\ \delta = 0.5}$}
+%&  0.030 &  0.034 &  0.035 &  0.034 &  0.036\\\cline{2-2} \multirow{1}*{} & \multirow{1}*{ESQM$_{{\rm ls},\ \delta = 0.1}$}
+%&  0.030 &  0.034 &  0.035 &  0.034 &  0.036\\\cline{2-2} \multirow{1}*{} & \multirow{1}*{ESQM$_{{\rm ls},\ \delta = 0.02}$}
+%&  0.030 &  0.034 &  0.035 &  0.034 &  0.036\\\cline{1-7} \multirow{5}*{Residual} & \multirow{1}*{SPGL1}
+%& -1.72e-04 & -2.10e-04 & -1.53e-04 & -1.37e-04 & -1.26e-04\\\cline{2-7} \multirow{1}*{} & \multirow{1}*{FPA$_{\rm retract}$}
+%& 1.69e-15 & 1.35e-15 & 2.79e-16 & -7.54e-16 & -1.42e-15\\\cline{2-2} \multirow{1}*{} & \multirow{1}*{ESQM$_{{\rm ls},\ \delta = 0.5}$}
+%& 1.21e-10 & 1.22e-10 & 1.12e-10 & 1.10e-10 & 1.11e-10\\\cline{2-2} \multirow{1}*{}      & \multirow{1}*{ESQM$_{{\rm ls},\ \delta = 0.1}$}
+%& 1.06e-10 & 9.98e-11 & 9.32e-11 & 9.36e-11 & 9.10e-11\\\cline{2-2} \multirow{1}*{}      & \multirow{1}*{ESQM$_{{\rm ls},\ \delta = 0.02}$}
+%& 1.01e-10 & 9.93e-11 & 9.77e-11 & 9.47e-11 & 9.60e-11\\\cline{1-7}
+%\end{tabular}
+%}
+%\end{center}
+%\end{table}
+%
+%
+%
+%\begin{table}[H]
+%\caption{Computational results for problem (6.2) with initial point $x^0$ is given as in (6.6) for all algorithms}\label{table1}
+%\begin{center}
+%{\footnotesize
+%\begin{tabular}{|c|c|c|c|c|c|c|}\hline
+%\phantom{\diagbox{Date}{$i$}} & \multicolumn{1}{|c|}{Method} & \multicolumn{1}{|c|}{$i = 2$} & \multicolumn{1}{c|}{ $i = 4$ }
+%& \multicolumn{1}{c|}{ $i = 6$ } & \multicolumn{1}{|c|}{ $i = 8$ } & \multicolumn{1}{c|}{ $i = 10$ }\\\cline{1-7}
+%\multirow{7}*{CPU time} & \multirow{1}*{QR}
+%&   0.47 &   3.05 &   9.83 &  23.25 &  44.84\\\cline{2-2} \multirow{1}*{} & \multirow{1}*{Slater}
+%&   0.01 &   0.02 &   0.05 &   0.09 &   0.15\\\cline{2-2} \multirow{1}*{} & \multirow{1}*{SPGL1}
+%&   1.59 &   7.35 &  15.20 &  30.17 &  48.54\\\cline{2-7} \multirow{1}*{} & \multirow{1}*{FPA$_{\rm retract}$}
+%&   3.40 &  12.30 &  37.94 &  56.91 &  97.89\\\cline{2-2} \multirow{1}*{}  & \multirow{1}*{ESQM$_{{\rm ls},\ \delta = 0.5}$}
+%&   5.43 &  23.38 &  61.11 & 104.34 & 173.99\\\cline{2-2} \multirow{1}*{}  & \multirow{1}*{ESQM$_{{\rm ls},\ \delta = 0.1}$}
+%&   4.64 &  20.41 &  51.46 &  88.36 & 146.46\\\cline{2-2} \multirow{1}*{}  & \multirow{1}*{ESQM$_{{\rm ls},\ \delta = 0.02}$}
+%&  13.25 &  58.83 & 136.92 & 239.48 & 382.51\\\cline{1-7} \multirow{4}*{Iter} & \multirow{1}*{FPA$_{\rm retract}$}
+%&    420 &    368 &    520 &    444 &    493\\\cline{2-2} \multirow{1}*{}     & \multirow{1}*{ESQM$_{{\rm ls},\ \delta = 0.5}$}
+%&    893 &    937 &   1113 &   1099 &   1186\\\cline{2-2} \multirow{1}*{}     & \multirow{1}*{ESQM$_{{\rm ls},\ \delta = 0.1}$}
+%&    839 &    863 &    977 &    963 &   1025\\\cline{2-2} \multirow{1}*{}     & \multirow{1}*{ESQM$_{{\rm ls},\ \delta = 0.02}$}
+%&   2508 &   2550 &   2653 &   2650 &   2702\\\cline{1-7} \multirow{5}*{RecErr} & \multirow{1}*{SPGL1}
+%&  0.061 &  0.045 &  0.066 &  0.051 &  0.054\\\cline{2-7} \multirow{1}*{} & \multirow{1}*{FPA$_{\rm retract}$}
+%&  0.032 &  0.032 &  0.035 &  0.035 &  0.037\\\cline{2-2} \multirow{1}*{} & \multirow{1}*{ESQM$_{{\rm ls},\ \delta = 0.5}$}
+%&  0.032 &  0.032 &  0.035 &  0.035 &  0.037\\\cline{2-2} \multirow{1}*{} & \multirow{1}*{ESQM$_{{\rm ls},\ \delta = 0.1}$}
+%&  0.032 &  0.032 &  0.035 &  0.035 &  0.037\\\cline{2-2} \multirow{1}*{} & \multirow{1}*{ESQM$_{{\rm ls},\ \delta = 0.02}$}
+%&  0.032 &  0.032 &  0.035 &  0.035 &  0.037\\\cline{1-7} \multirow{5}*{Residual} & \multirow{1}*{SPGL1}
+%& -2.72e-04 & -2.20e-04 & -1.41e-04 & -1.19e-04 & -1.30e-04\\\cline{2-7} \multirow{1}*{} & \multirow{1}*{FPA$_{\rm retract}$}
+%& -1.86e-16 & 2.98e-16 & 1.85e-15 & -5.27e-16 & -1.31e-15\\\cline{2-2} \multirow{1}*{} & \multirow{1}*{ESQM$_{{\rm ls},\ \delta = 0.5}$}
+%& 1.08e-10 & 1.15e-10 & 1.01e-10 & 1.09e-10 & 1.05e-10\\\cline{2-2} \multirow{1}*{}      & \multirow{1}*{ESQM$_{{\rm ls},\ \delta = 0.1}$}
+%& 9.49e-11 & 9.50e-11 & 8.90e-11 & 9.60e-11 & 9.95e-11\\\cline{2-2} \multirow{1}*{}      & \multirow{1}*{ESQM$_{{\rm ls},\ \delta = 0.02}$}
+%& 9.35e-11 & 9.91e-11 & 9.14e-11 & 9.44e-11 & 9.34e-11\\\cline{1-7}
+%\end{tabular}
+%}
+%\end{center}
+%\end{table}
 
 
     \item  \textit{\textbf{Reviewer:}} \textit{P26: In table 2, the time of SPGL1 for i = 4 is greater than for i = 6. Does it make any sense?}
@@ -235,7 +274,7 @@ Indeed, the above seems a better title for the work because it connects the core
 
 	\item \textit{\textbf{Reviewer:}} \textit{ d) Assumption 4.1. The notation $\xi$ has already been employed for the subgradient of $P_2$.}
 
-    \textbf{Response:} Thanks for the comment. We replace $\xi$ with $\varphi$ in Assumption 4.1 and beyond.
+    \textbf{Response:} Thanks for the comment. We replace $\varphi$ with $\phi$ in Definition 2.1 and replace $\xi$ with $\varphi$ in Assumption 4.1 and beyond.
 
 	\item \textit{\textbf{Reviewer:}} \textit{ e) Assumption 4.2. The Slater point must be known.}
 
@@ -309,7 +348,7 @@ One natural scenario arises from compressed sensing problems for complex signals
     {\rm s.t.} & \|Ax - b\|_{LL_2,\gamma}\leq \overline{\sigma},
   \end{array}
 \end{equation}
-While theoretically one can apply SCP to the above problem, it is unclear to us how the subproblems, which are nonlinearly constrained, can be solved efficiently. In contrast, the subproblems that arise in our approach can still be solved efficiently using Newton's method. We have now adopted this complex version of compressed sensing problems in our numerical experiment section. 
+While theoretically one can apply SCP to the above problem, it is unclear to us how the subproblems, which are nonlinearly constrained, can be solved efficiently. In contrast, the subproblems that arise in our approach can still be solved efficiently using Newton's method. We have now adopted this complex version of compressed sensing problems in our numerical experiment section.
 %Notice that this problem can not be solved efficiently by SCP in [42] (as we don't know how to efficiently solve the subproblem of SCP in this case). Hence we replace problem (6.3) in article with problem \eqref{E2}, and have modified it accordingly. We compare FPA$_{\rm retract}$ and ESQM$_{\rm ls}$ on solving random instances of \eqref{E2}. The results are shown in Table 4 and Table 5, which correspond to different initial points.
 %
 %\begin{table}[H]
