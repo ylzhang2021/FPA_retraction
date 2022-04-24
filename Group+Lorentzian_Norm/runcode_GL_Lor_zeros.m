@@ -1,4 +1,3 @@
-
 clear;
 clc;
 
@@ -114,19 +113,26 @@ for h = 1 : lensize
         t_spgl1 = toc(tstart2);
 
         
-        x_spgl1_reim = reshape(x_spgl1, n, J);
-        fval_spgl1 = sum(sqrt(sum(x_spgl1_reim'.*x_spgl1_reim'))) - mu*norm(x_spgl1);
+        xmatrix_spgl1 = reshape(x_spgl1, n, J);
+        fval_spgl1 = sum(sqrt(sum(xmatrix_spgl1'.*xmatrix_spgl1'))) - mu*norm(x_spgl1);
         Residual_spgl1 = (sum(log(1 + (A*x_spgl1 - b).^2/gamma^2)) - sigma)/sigma;        
         RecErr_spgl1 =  norm(x_spgl1 - x0)/max(1, norm(x0));
         fprintf(' SPGL1 terminated for l1 : time = %4.1f, nnz = %d,  fval = %7.4e, rec_err = %g, residual = %g \n',...
             t_spgl1, nnz(abs(x_spgl1) > 1e-10), fval_spgl1, RecErr_spgl1, Residual_spgl1);
         
         % Project x_spgl1 to the box C and check x_spgl1 belong to the feasible set
-        x_spgl1 = 0*x_spgl1;
+        xmatrix_spgl1 = 0.*xmatrix_spgl1;
         tfeas = tic;
-        xslater_reim = reshape(xslater, n, J);
-        M = (sum(sqrt(sum(xslater_reim'.*xslater_reim'))) - mu*norm(xslater))/(1 - mu); % Upper bound of x
-        x_spgl11 = max(min(x_spgl1, M), -M);
+        xslatermatrix = reshape(xslater, n, J);
+        fval_xslater = sum(sqrt(sum(xslatermatrix'.*xslatermatrix'))) - mu*norm(xslater); 
+        M =  fval_xslater/(1 - mu); % Upper bound of \|x_J\|
+        normxmatrix = sqrt(sum(xmatrix_spgl1'.*xmatrix_spgl1'));
+        JJ = normxmatrix > M;
+        aa = ones(1, n);
+        aa(JJ) = M./normxmatrix(JJ);
+        xmatrix_spgl11 = xmatrix_spgl1'.*repmat(aa, J, 1);
+        x_spgl11 = reshape(xmatrix_spgl11', 2*n, 1);   
+        
         xin =  feasible1(A, b, gamma, sigma, x_spgl11, xslater);
         t_feas = toc(tfeas);
         
@@ -138,8 +144,8 @@ for h = 1 : lensize
         if flag_sqp ==1
             iter_sqp_s = iter_sqp_s +1;
         end
-        x_sqp_reim = reshape(x_sqp, n, J);
-        fval_sqp = sum(sqrt(sum(x_sqp_reim'.*x_sqp_reim'))) - mu*norm(x_sqp);
+        xmatrix_sqp = reshape(x_sqp, n, J);
+        fval_sqp = sum(sqrt(sum(xmatrix_sqp'.*xmatrix_sqp'))) - mu*norm(x_sqp);
         Residual_sqp = (sum(log(1 + (A*x_sqp - b).^2/gamma^2)) - sigma)/sigma;
         RecErr_sqp = norm(x_sqp - x0)/max(1, norm(x0));
         fprintf('SQP Termination: iter = %d, time = %4.1f, nnz = %d,  fval = %16.10f, residual  = %7.4e, rec_err = %g \n',...
@@ -153,8 +159,8 @@ for h = 1 : lensize
         if flag_esqm1 == 1
             iter_esqm_s1 = iter_esqm_s1 +1;
         end
-        x_esqm1_reim = reshape(x_esqm1, n, J);
-        fval_esqm1 = sum(sqrt(sum(x_esqm1_reim'.*x_esqm1_reim'))) - mu*norm(x_esqm1);
+        xmatrix_esqm1 = reshape(x_esqm1, n, J);
+        fval_esqm1 = sum(sqrt(sum(xmatrix_esqm1'.*xmatrix_esqm1'))) - mu*norm(x_esqm1);
         Residual_esqm1 = (sum(log(1 + (A*x_esqm1 - b).^2/gamma^2)) - sigma)/sigma;
         RecErr_esqm1 = norm(x_esqm1 - x0)/max(1, norm(x0));
         fprintf(' ESQM_1  terminated :  iter = %d, time = %4.1f, nnz = %d,  fval = %16.10f, residual = %7.4e, rec_err = %g  \n',...
@@ -168,8 +174,8 @@ for h = 1 : lensize
         if flag_esqm2 == 1
             iter_esqm_s2 = iter_esqm_s2 +1;
         end
-        x_esqm2_reim = reshape(x_esqm2, n, J);
-        fval_esqm2 = sum(sqrt(sum(x_esqm2_reim'.*x_esqm2_reim'))) - mu*norm(x_esqm2);
+        xmatrix_esqm2 = reshape(x_esqm2, n, J);
+        fval_esqm2 = sum(sqrt(sum(xmatrix_esqm2'.*xmatrix_esqm2'))) - mu*norm(x_esqm2);
         Residual_esqm2 = (sum(log(1 + (A*x_esqm2 - b).^2/gamma^2)) - sigma)/sigma;
         RecErr_esqm2 = norm(x_esqm2 - x0)/max(1, norm(x0));
         fprintf(' ESQM_2  terminated :  iter = %d, time = %4.1f, nnz = %d,  fval = %16.10f, residual = %7.4e, rec_err = %g  \n',...
@@ -183,8 +189,8 @@ for h = 1 : lensize
         if flag_esqm3 == 1
             iter_esqm_s3 = iter_esqm_s3 +1;
         end
-        x_esqm3_reim = reshape(x_esqm3, n, J);
-        fval_esqm3 = sum(sqrt(sum(x_esqm3_reim'.*x_esqm3_reim'))) - mu*norm(x_esqm3);
+        xmatirx_esqm3 = reshape(x_esqm3, n, J);
+        fval_esqm3 = sum(sqrt(sum(xmatirx_esqm3'.*xmatirx_esqm3'))) - mu*norm(x_esqm3);
         Residual_esqm3 = (sum(log(1 + (A*x_esqm3 - b).^2/gamma^2)) - sigma)/sigma;
         RecErr_esqm3 = norm(x_esqm3 - x0)/max(1, norm(x0));
         fprintf(' ESQM_3  terminated :  iter = %d, time = %4.1f, nnz = %d,  fval = %16.10f, residual = %7.4e, rec_err = %g  \n',...
