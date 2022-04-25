@@ -1112,27 +1112,27 @@ From Table ~\ref{table1}, one can see that the recovery errors of FPA$_{\rm retr
 \phantom{\diagbox{Date}{$i$}} & \multicolumn{1}{|c|}{Method} & \multicolumn{1}{|c|}{$i = 2$} & \multicolumn{1}{c|}{ $i = 4$ }
 & \multicolumn{1}{c|}{ $i = 6$ } & \multicolumn{1}{|c|}{ $i = 8$ } & \multicolumn{1}{c|}{ $i = 10$ }\\\cline{1-7}
 \multirow{7}*{CPU time} & \multirow{1}*{QR}
-&   0.47 &   3.05 &   9.83 &  23.25 &  44.84\\\cline{2-2} \multirow{1}*{} & \multirow{1}*{Slater}
-&   0.01 &   0.02 &   0.05 &   0.09 &   0.15\\\cline{2-2} \multirow{1}*{} & \multirow{1}*{SPGL1}
-&   1.59 &   7.35 &  15.20 &  30.17 &  48.54\\\cline{2-7} \multirow{1}*{} & \multirow{1}*{FPA$_{\rm retract}$}
-&   3.40 &  12.30 &  37.94 &  56.91 &  97.89\\\cline{2-2} \multirow{1}*{}  & \multirow{1}*{ESQM$_{{\rm ls},\ \delta = 0.5}$}
-&   5.43 &  23.38 &  61.11 & 104.34 & 173.99\\\cline{2-2} \multirow{1}*{}  & \multirow{1}*{ESQM$_{{\rm ls},\ \delta = 0.1}$}
-&   4.64 &  20.41 &  51.46 &  88.36 & 146.46\\\cline{2-2} \multirow{1}*{}  & \multirow{1}*{ESQM$_{{\rm ls},\ \delta = 0.02}$}
-&  13.25 &  58.83 & 136.92 & 239.48 & 382.51\\\cline{1-7} \multirow{4}*{Iter} & \multirow{1}*{FPA$_{\rm retract}$}
-&    420 &    368 &    520 &    444 &    493\\\cline{2-2} \multirow{1}*{}     & \multirow{1}*{ESQM$_{{\rm ls},\ \delta = 0.5}$}
-&    893 &    937 &   1113 &   1099 &   1186\\\cline{2-2} \multirow{1}*{}     & \multirow{1}*{ESQM$_{{\rm ls},\ \delta = 0.1}$}
-&    839 &    863 &    977 &    963 &   1025\\\cline{2-2} \multirow{1}*{}     & \multirow{1}*{ESQM$_{{\rm ls},\ \delta = 0.02}$}
-&   2508 &   2550 &   2653 &   2650 &   2702\\\cline{1-7} \multirow{5}*{RecErr} & \multirow{1}*{SPGL1}
-&  0.061 &  0.045 &  0.066 &  0.051 &  0.054\\\cline{2-7} \multirow{1}*{} & \multirow{1}*{FPA$_{\rm retract}$}
-&  0.032 &  0.032 &  0.035 &  0.035 &  0.037\\\cline{2-2} \multirow{1}*{} & \multirow{1}*{ESQM$_{{\rm ls},\ \delta = 0.5}$}
-&  0.032 &  0.032 &  0.035 &  0.035 &  0.037\\\cline{2-2} \multirow{1}*{} & \multirow{1}*{ESQM$_{{\rm ls},\ \delta = 0.1}$}
-&  0.032 &  0.032 &  0.035 &  0.035 &  0.037\\\cline{2-2} \multirow{1}*{} & \multirow{1}*{ESQM$_{{\rm ls},\ \delta = 0.02}$}
-&  0.032 &  0.032 &  0.035 &  0.035 &  0.037\\\cline{1-7} \multirow{5}*{Residual} & \multirow{1}*{SPGL1}
-& -2.72e-04 & -2.20e-04 & -1.41e-04 & -1.19e-04 & -1.30e-04\\\cline{2-7} \multirow{1}*{} & \multirow{1}*{FPA$_{\rm retract}$}
-& -1.86e-16 & 2.98e-16 & 1.85e-15 & -5.27e-16 & -1.31e-15\\\cline{2-2} \multirow{1}*{} & \multirow{1}*{ESQM$_{{\rm ls},\ \delta = 0.5}$}
-& 1.08e-10 & 1.15e-10 & 1.01e-10 & 1.09e-10 & 1.05e-10\\\cline{2-2} \multirow{1}*{}      & \multirow{1}*{ESQM$_{{\rm ls},\ \delta = 0.1}$}
-& 9.49e-11 & 9.50e-11 & 8.90e-11 & 9.60e-11 & 9.95e-11\\\cline{2-2} \multirow{1}*{}      & \multirow{1}*{ESQM$_{{\rm ls},\ \delta = 0.02}$}
-& 9.35e-11 & 9.91e-11 & 9.14e-11 & 9.44e-11 & 9.34e-11\\\cline{1-7}
+&   0.56 &   3.34 &  10.69 &  44.45 &  49.15\\\cline{2-2} \multirow{1}*{} & \multirow{1}*{Slater}
+&   0.01 &   0.02 &   0.05 &   0.16 &   0.16\\\cline{2-2} \multirow{1}*{} & \multirow{1}*{SPGL1}
+&   1.69 &   7.41 &  16.76 &  39.55 &  42.02\\\cline{2-7} \multirow{1}*{} & \multirow{1}*{FPA$_{\rm retract}$}
+&   3.26 &  14.59 &  30.10 &  69.41 & 104.50\\\cline{2-2} \multirow{1}*{}  & \multirow{1}*{ESQM$_{{\rm ls},\ \delta = 0.5}$}
+&   5.39 &  25.64 &  56.20 & 134.31 & 169.64\\\cline{2-2} \multirow{1}*{}  & \multirow{1}*{ESQM$_{{\rm ls},\ \delta = 0.1}$}
+&   4.99 &  21.87 &  48.51 & 114.55 & 142.53\\\cline{2-2} \multirow{1}*{}  & \multirow{1}*{ESQM$_{{\rm ls},\ \delta = 0.02}$}
+&  14.95 &  62.79 & 136.41 & 308.62 & 377.03\\\cline{1-7} \multirow{4}*{Iter} & \multirow{1}*{FPA$_{\rm retract}$}
+&    342 &    406 &    398 &    418 &    533\\\cline{2-2} \multirow{1}*{}     & \multirow{1}*{ESQM$_{{\rm ls},\ \delta = 0.5}$}
+&    756 &    965 &   1002 &   1078 &   1161\\\cline{2-2} \multirow{1}*{}     & \multirow{1}*{ESQM$_{{\rm ls},\ \delta = 0.1}$}
+&    773 &    870 &    905 &    952 &   1002\\\cline{2-2} \multirow{1}*{}     & \multirow{1}*{ESQM$_{{\rm ls},\ \delta = 0.02}$}
+&   2446 &   2559 &   2595 &   2629 &   2684\\\cline{1-7} \multirow{5}*{RecErr} & \multirow{1}*{SPGL1}
+&  0.054 &  0.055 &  0.048 &  0.046 &  0.066\\\cline{2-7} \multirow{1}*{} & \multirow{1}*{FPA$_{\rm retract}$}
+&  0.030 &  0.033 &  0.033 &  0.035 &  0.036\\\cline{2-2} \multirow{1}*{} & \multirow{1}*{ESQM$_{{\rm ls},\ \delta = 0.5}$}
+&  0.030 &  0.033 &  0.033 &  0.035 &  0.036\\\cline{2-2} \multirow{1}*{} & \multirow{1}*{ESQM$_{{\rm ls},\ \delta = 0.1}$}
+&  0.030 &  0.033 &  0.033 &  0.035 &  0.036\\\cline{2-2} \multirow{1}*{} & \multirow{1}*{ESQM$_{{\rm ls},\ \delta = 0.02}$}
+&  0.030 &  0.033 &  0.033 &  0.035 &  0.036\\\cline{1-7} \multirow{5}*{Residual} & \multirow{1}*{SPGL1}
+& -2.01e-04 & -1.63e-04 & -1.87e-04 & -1.40e-04 & -9.35e-05\\\cline{2-7} \multirow{1}*{} & \multirow{1}*{FPA$_{\rm retract}$}
+& 5.89e-16 & 1.40e-15 & 5.99e-16 & 2.73e-15 & 1.05e-16\\\cline{2-2} \multirow{1}*{} & \multirow{1}*{ESQM$_{{\rm ls},\ \delta = 0.5}$}
+& 1.10e-10 & 1.17e-10 & 1.07e-10 & 1.01e-10 & 1.13e-10\\\cline{2-2} \multirow{1}*{}      & \multirow{1}*{ESQM$_{{\rm ls},\ \delta = 0.1}$}
+& 9.90e-11 & 8.93e-11 & 9.89e-11 & 1.00e-10 & 9.28e-11\\\cline{2-2} \multirow{1}*{}      & \multirow{1}*{ESQM$_{{\rm ls},\ \delta = 0.02}$}
+& 1.01e-10 & 9.20e-11 & 8.95e-11 & 9.14e-11 & 9.62e-11\\\cline{1-7}
 \end{tabular}
 }
 \end{center}
