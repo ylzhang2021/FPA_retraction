@@ -180,11 +180,11 @@ We say that the Mangasarian-Fromovitz constraint qualifications for \eqref{P0} h
 \]
 \end{definition}
 {\color{blue} It is known that if the $g_i$'s in \eqref{P0} are in addition convex and the (generalized) Slater condition holds, i.e., $\{x \in C: g_i(x) < 0, ~ i = 1, \ldots, m\} \neq \emptyset $, then the MFCQ holds at any point in ${\cal F}$; indeed, suppose that $g_i$'s in \eqref{P0} are in addition convex, $x\in {\cal F}$, $-\sum\limits_{i=1}^m\lambda_i \nabla g_i(x)\in \mathcal{N}_C(x)$, $\lambda_ig_i(x) =0$ and
-$\lambda_i\geq 0$ for all $i$, and let $\hat x\in C$ satisfy $\max_{i\in I}g_i(\hat x) \le -\delta < 0$ for some $\delta > 0$. Then
+$\lambda_i\geq 0$ for all $i$, and let $\hat x\in C$ satisfy $\max_{1\le i\le m}g_i(\hat x) \le -\delta < 0$ for some $\delta > 0$. Then
 \[
 0 \le \sum_{i=1}^m\langle \lambda_i \nabla g_i(x), \hat x - x\rangle\le \sum_{i=1}^m\lambda_i(g_i(\hat x) - g_i(x)) = \sum_{i=1}^m\lambda_ig_i(\hat x)\le -\delta\sum_{i=1}^m\lambda_i,
 \]
-where the first inequality holds thanks to $-\sum\limits_{i=1}^m\lambda_i \nabla g_i(x)\in \mathcal{N}_C(x)$ and $x\in {\cal F}\subseteq C$, and the second inequality is due to convexity.
+where the first inequality holds thanks to $-\sum\limits_{i=1}^m\lambda_i \nabla g_i(x)\in \mathcal{N}_C(x)$ and $\hat x\in C$, and the second inequality is due to convexity.
 The above display together with $\lambda_i \ge 0$ for all $i$ shows that $\lambda_i = 0$ for all $i$.
 }
 %Next, we recall the definition of stationary point of \eqref{P0} when $g$ is smooth.
@@ -938,7 +938,7 @@ Thus, $x\in S$ implies $(1 - \mu)\max\limits_{J\in \mathcal{J}}\|x_J\| \le (1 - 
 With these choices of $M > 0$, problem \eqref{E3} is a special case of \eqref{P0} with $m = 1$, $P_1(x)= \sum\limits_{J\in\mathcal{J}}\|x_J\|$, $P_2(x) = \mu\|x\|$, $g_1(x) = \|Ax - b\|^2 - \sigma^2$ and $C = \{x\in\R^n:\; \max\limits_{J\in \mathcal{J}}\|x_J\| \leq M\}$. Moreover, Assumption~\ref{assumption1} holds for \eqref{E3} with $\xfeas = \tx$. Therefore, we can apply Algorithm~\ref{SQP_retract} to \eqref{E3}. In our numerical experiments below, we will be solving random instances of \eqref{E3} with $M = (1 - \mu)^{-1}[\sum\limits_{J\in\mathcal{J}}\|\tx_J\| - \mu\|\tx\|]$.
 
 \subsection{Compressed sensing with Cauchy noise for complex signals}\label{sec6.2}
-{\color{blue} In compressed sensing for real signals, when the measurement is contaminated with Cauchy noise, the Lorentzian norm $\|y\|_{LL_2,\gamma}:= \sum\limits_{j=1}^{2p}\log(1 + \gamma^{-2}y_j^2)$ can be employed as the loss function \cite{CaBA10,CaRA16}, where $\gamma > 0$ and $y\in \R^{2p}$. Here we explore the scenario when the signal and the measurement matrix have \emph{complex} entries with the transmission contaminated by Cauchy noise. Specifically, in this setting, an unknown sparse vector ${\bf z}_0\in {\mathbb{C}}^n$ is compressed via multiplication with a given matrix ${\bf A}\in \mathbb{C}^{p\times n}$ and the resulting ${\bf A} {\bf z}_0$ is transmitted. The target is to recover approximately the vector ${\bf z}_0$ from the received signal ${\bf b} := {\bf A}{\bf z}_0 + \varepsilon$, where $\varepsilon \in {\mathbb{C}}^p$ is the noise vector, with the real and imaginary parts of each entry following an i.i.d. Cauchy distribution with mean $0$. In view of the structure of $\varepsilon$, we will view it as a random vector in $\R^{2p}$ with i.i.d. Cauchy entries and consider the Lorentzian norm for this real vector in our compressed sensing model below.
+{\color{blue} In compressed sensing for real signals, when the measurement (say, of dimension $2p$) is contaminated with Cauchy noise, the Lorentzian norm $\|y\|_{LL_2,\gamma}:= \sum\limits_{j=1}^{2p}\log(1 + \gamma^{-2}y_j^2)$ can be employed as the loss function \cite{CaBA10,CaRA16}, where $\gamma > 0$ and $y\in \R^{2p}$. Here we explore the scenario when the signal and the measurement matrix have \emph{complex} entries with the transmission contaminated by Cauchy noise. Specifically, in this setting, an unknown sparse vector ${\bf z}_0\in {\mathbb{C}}^n$ is compressed via multiplication with a given matrix ${\bf A}\in \mathbb{C}^{p\times n}$ and the resulting ${\bf A} {\bf z}_0$ is transmitted. The target is to recover approximately the vector ${\bf z}_0$ from the received signal ${\bf b} := {\bf A}{\bf z}_0 + \varepsilon$, where $\varepsilon \in {\mathbb{C}}^p$ is the noise vector, with the real and imaginary parts of each entry following an i.i.d. Cauchy distribution with mean $0$. In view of the structure of $\varepsilon$, we will view it as a random vector in $\R^{2p}$ with i.i.d. Cauchy entries and consider the Lorentzian norm for this real vector in our compressed sensing model below.
 
 To derive the model, we start by writing
 \[
@@ -975,7 +975,7 @@ Based on the above observation and motivated by the use of $\ell_{1-2}$-type reg
 {\rm s.t.} & \|Ax - b\|_{LL_2,\gamma}\leq \overline{\sigma},
   \end{array}
 \end{equation}
-where $A\in\R^{2p\times 2n}$ and $b\in \R^{2p}$ are given in \eqref{defineAb}, $\mu \in (0,1)$ and $\overline{\sigma} \in (0,\|b\|_{LL_2,\gamma})$, $\mathcal{J} := \bigcup_{i=1}^p\mathcal{J}_i$ with $\mathcal{J}_i := \{i,i+p\}$ for each $i$, and $x_J\in\R^2$ is the subvector of $x$ indexed by $J\in\mathcal{J}$. Moreover, we assume without loss of generality that $A$ has full row rank: this can be inferred from the fact that the measurement matrix ${\bf A}$ typically has full row rank. %Since $A$ has full row rank, there exists $\hx\in\R^n$ such that $A \hx = b$.
+where $A\in\R^{2p\times 2n}$ and $b\in \R^{2p}$ are given in \eqref{defineAb}, $\mu \in (0,1)$ and $\overline{\sigma} \in (0,\|b\|_{LL_2,\gamma})$, $\mathcal{J} := \bigcup_{i=1}^n\mathcal{J}_i$ with $\mathcal{J}_i := \{i,i+n\}$ for each $i$, and $x_J\in\R^2$ is the subvector of $x$ indexed by $J\in\mathcal{J}$. Moreover, we assume without loss of generality that $A$ has full row rank: this can be inferred from the fact that the measurement matrix ${\bf A}$ typically has full row rank. %Since $A$ has full row rank, there exists $\hx\in\R^n$ such that $A \hx = b$.
 
 Although the feasible region of \eqref{E2} is unbounded and is not a special case of \eqref{P1}, one can argue as in the discussion following \eqref{E3} that \eqref{E2} is equivalent to the following model:
 \begin{equation}\label{E4}
