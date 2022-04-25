@@ -73,7 +73,7 @@ for h = 1 : lensize
             error('0 is included in the feasible set. \n');
         end
         
-        % Genarate the slater point
+        % Generate the slater point
         tqr = tic;
         [Q,R] = qr(A',0);
         t_qr = toc(tqr);
@@ -97,7 +97,7 @@ for h = 1 : lensize
         
         L = nmA;
         
-        %  Using SPGL1 to genarate the start point
+        %  Using SPGL1 to generate the starting point
        fprintf('Start of SPGL1 \n');
         
         
@@ -120,7 +120,7 @@ for h = 1 : lensize
         fprintf(' SPGL1 terminated for l1 : time = %4.1f, nnz = %d,  fval = %7.4e, rec_err = %g, residual = %g \n',...
             t_spgl1, nnz(abs(x_spgl1) > 1e-10), fval_spgl1, RecErr_spgl1, Residual_spgl1);
         
-        % Project x_spgl1 to the box C and check x_spgl1 belong to the feasible set
+        % Project x_spgl1 onto the box C and check if x_spgl1 belongs to the feasible set
         tfeas = tic;
         xslatermatrix = reshape(xslater, n, J);
         fval_xslater = sum(sqrt(sum(xslatermatrix'.*xslatermatrix'))) - mu*norm(xslater); 
