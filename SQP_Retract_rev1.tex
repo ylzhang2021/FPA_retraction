@@ -116,17 +116,25 @@ We consider the following difference-of-convex (DC) optimization problem with sm
            & x\in C,
   \end{array}
 \end{equation}
-where $P_1:\R^n\rightarrow\R$ and $P_2:\R^n\rightarrow\R$ are {\color{blue}finite-valued convex} functions, $C\subseteq \R^n$ is a nonempty compact convex set, $g_i:\R^n\rightarrow\R$ is smooth with Lipschitz gradient on $C$ for each $i$, and the feasible set $\mathcal{F} :=\{x\in C:\; g_i(x)\le 0, ~ i = 1,\ldots, m\}$ is nonempty. This model problem covers many important optimization problems arising from diverse areas. For example, one can model the compressed sensing (CS) problem with Cauchy noise by minimizing the difference of $\ell_1$-norm and $\ell_2$-norm \cite{YiLH15} or its variants subject to an inequality constraint defined by the so-called Lorentzian norm \cite{CaBA10}, and the set $C$ in \eqref{P0} can be used for modeling other prior information such as bounds or nonnegativity; more discussions on this particular application can be found in Section~\ref{sec6.2} below. Problem~\eqref{P0} is typically challenging to solve because it is in general nonconvex and nonsmooth.% optimization problem.
+where $P_1:\R^n\rightarrow\R$ and $P_2:\R^n\rightarrow\R$ are {\color{blue}finite-valued convex} functions, $C\subseteq \R^n$ is a nonempty compact convex set, $g_i:\R^n\rightarrow\R$ is smooth with Lipschitz gradient on $C$ for each $i$, and the feasible set $\mathcal{F} :=\{x\in C:\; g_i(x)\le 0, ~ i = 1,\ldots, m\}$ is nonempty.
 
-In this paper, we are interested in developing first-order feasible methods for solving problem \eqref{P0} that rely on affine approximations to the smooth inequality constraints in the subproblems. Our methods utilize only first-order information, and the subproblems that arise are convex constrained optimization problems with the constraint sets being the intersection of $C$ and a polyhedron.\footnote{On passing, we would like to point out that there are also first-order methods that rely on quadratically approximating the constraint functions (see, for example, \cite{Au13,AuSheTeb10,BoPau16,YuLP20}), which lead to more difficult subproblems.} Moreover, it also has the desirable feature that  all the iterates generated always belong to the feasible region. In the literature, the most widely used method for solving \eqref{P0} when the objective function $P$ is additionally smooth and also involves affine approximations to the constraint set is the so-called sequential quadratic programming (SQP) method: Indeed, this class of methods typically further requires that the objective function $P$ and all the constraint functions $g_i$'s to be twice continuously differentiable. The underlying strategy of SQP methods is to construct an algorithm which, at each iteration, utilizes a convex quadratic programming problem with affine constraints to approximate the original nonlinear optimization problem. The literature is vast and we refer the readers to \cite{Ber95,NoWr06,GiWo12,FlGL02,So09,Au13,BoPau16,WrightTenny04,PaTi93,FlPa08,LawTits01}.
+The model problem (\ref{P0}) covers many important optimization problems arising from diverse areas. For example, one can model the compressed sensing (CS) problem with Cauchy noise by minimizing the difference of $\ell_1$-norm and $\ell_2$-norm \cite{YiLH15} or its variants subject to an inequality constraint defined by the so-called Lorentzian norm \cite{CaBA10}, and the set $C$ in \eqref{P0} can be used for modeling other prior information such as bounds or nonnegativity; more discussions on this particular application can be found in Section~\ref{sec6.2} below. Problem~\eqref{P0} is typically challenging to solve because it is in general nonconvex and nonsmooth.% optimization problem.
+
+In this paper, we are interested in developing first-order feasible methods for solving problem \eqref{P0} that rely on affine approximations to the smooth inequality constraints in the subproblems. Our methods utilize only first-order information, and the subproblems that arise are convex constrained optimization problems with the constraint sets being the intersection of $C$ and a polyhedron. %\footnote{On passing, we would like to point out that there are also first-order methods that rely on quadratically approximating the constraint functions (see, for example, \cite{Au13,AuSheTeb10,BoPau16,YuLP20}), which lead to more difficult subproblems.}
+ Moreover, it also has the desirable feature that  all the iterates generated always belong to the feasible region. In the literature, the most widely used method for solving \eqref{P0} when the objective function $P$ is additionally smooth and also involves affine approximations to the constraint set is the so-called sequential quadratic programming (SQP) method: Indeed, this class of methods typically further requires that the objective function $P$ and all the constraint functions $g_i$'s to be twice continuously differentiable. The underlying strategy of SQP methods is to construct an algorithm which, at each iteration, utilizes a convex quadratic programming problem with affine constraints to approximate the original nonlinear optimization problem. The literature is vast and we refer the readers to \cite{Ber95,NoWr06,GiWo12,FlGL02,So09,Au13,BoPau16,WrightTenny04,PaTi93,FlPa08,LawTits01}.
 Recent works on SQP-type methods include \cite{Au13,BoPau16}, where the authors proposed and studied the global convergence of some general majorization minimization schemes which cover various SQP-type methods as special cases. However, these SQP-type methods therein are infeasible SQP-type methods, that is, they do not necessarily force all iterates to be feasible. There are also ``feasible SQP methods" that perform arc-search along quadratic curves determined by two directions, namely a descent direction and a feasible direction (see, for example, \cite{PaTi93,FlPa08,LawTits01}). However, these methods make use of the smoothness of the objective and constraint functions to construct the two directions, and it is unclear how their strategies can be adapted to problem~\eqref{P0} that has a possibly nonsmooth objective.
 
 In this paper, we aim at developing feasible first-order methods for the nonconvex nonsmooth problem \eqref{P0} under additional assumptions on $g_i$ by making use of affine approximations for the constraints as in SQP-type methods, and establishing the global convergence of the proposed algorithms. Different from the SQP-type methods covered in \cite{Au13,BoPau16}, our methods maintain feasibility of all iterates for solving \eqref{P0}, under additional assumptions on $g_i$. Our strategy for maintaining feasibility is different from those adopted in the literature of ``feasible SQP methods" that are based on arc-search. Instead, we adapt the retraction strategy used in manifold optimization \cite{ChenMA20,ChenZM19} in our scheme to ensure descent property for the objective function while maintaining the feasibility of the iterates.
 
+{\color{blue} For nonconvex optimization problems with difference-of-convex structure, our method belongs to
+the so-called successive convex programs strategy which, in each subproblem, a convex approximation to the constraint is formed. In the literature, popular methods of this form include the standard difference-of-convex algorithm (DCA) and its variants (see \cite{DCA18} for a recent survey), and also the moving balls approximation methods \cite{Au13,AuSheTeb10,BoPau16,YuLP20}. For these methods, their subproblems involve quadratic or general convex constraints which are, in general, harder to solve comparing to our proposed method because our method solves a linearly constrained problem in each subproblem.  It is also worth mentioning that the technique in using affine approximation for the constraints to construct numerical methods to solve possibly nonconvex problems has been exploited in the literature  (for example, see \cite{Veinott,AckOli16}). However, our method differs from these methods in various important aspects. More explicitly, \cite{Veinott,AckOli16} proposed the so-called supporting hyperplane methods which employ a cutting plane strategy. In particular, for the supporting hyperplane methods in \cite{Veinott,AckOli16}, as the algorithm progresses, the number of halfspaces involved in the subproblem {\em grows}, with many of them constructed based on information from the \emph{past iterates}. In contrast, our method only requires a {\it fixed} number of halfspaces in each iteration, and the constraint functions are linearized only at the \emph{current iterate}. Thus, the computational effort for solving each subproblem is similar in our method. In addition, due to the specific construction of the retraction step, our method ensures the descent property of the objective value: an important aspect that was not exploited in \cite{Veinott,AckOli16}.
+%These type of methods   %including the recent studies on convergence to a stronger version of the stationarity \cite{PRA17}.
+}
+
 More explicitly, the contributions of this paper are summarized as follows:
 \begin{itemize}
   \item We propose a retraction based first-order feasible method that utilizes affine approximations for the constraints in each subproblem for solving problem \eqref{P0} in the case where the constraint functions $g_i$'s are convex under strict feasibility condition, and establish its global subsequential convergence. We also analyze the convergence rate in the fully convex setting, i.e., when $P_2$ is also zero, under suitable Kurdyka-{\L}ojasiewicz (KL) assumptions.
-  \item By assuming a ``strong" strict feasibility condition, we then extend our method to solve \eqref{P0} with one single specially structured nonconvex constraint function and establish the global subsequential convergence of the extended method. Our assumptions on the constraint function are general enough to allow the choice of the composition of the Lorentzian norm function with an affine function, a commonly used loss function for compressed sensing problems with Cauchy measurement noise \cite{CaBA10}.
+  \item By assuming {\color{blue} a stronger version of the strict feasibility condition}, we then extend our method to solve \eqref{P0} with one single specially structured nonconvex constraint function and establish the global subsequential convergence of the extended method. Our assumptions on the constraint function are general enough to allow the choice of the composition of the Lorentzian norm function with an affine function, a commonly used loss function for compressed sensing problems with Cauchy measurement noise \cite{CaBA10}.
   \item Finally, we examine the KL exponents of several structured optimization models of the form \eqref{P0}, an important quantity which quantifies the convergence rate of the proposed method in the convex setting. Specifically, we show that the extended objective\footnote{This refers to the sum of the objective and the indicator function of the constraint set.} of a large class of Euclidean norm (and more generally, group LASSO penalty) regularized convex optimization problems is a KL function with exponent $\frac12$. This complements the recent study in this direction \cite{LiPong18,YuLiPo19,YuLP20,ZYuP20}, and, in particular, gives rise to linear convergence of our method in solving these structured optimization models.
 \end{itemize}
 
@@ -248,7 +256,7 @@ We now describe our method for solving \eqref{P0} under Assumption~\ref{assumpti
 We first show that Algorithm~\ref{SQP_retract} is well defined. To this end, it suffices to show that, if $x^k\in {\cal F}$ for some $k\ge 0$, then the subproblem~\eqref{subproblem2} has a unique solution, $\widetilde\tau$ exists in Step 2a) and the line-search step in Step 2b) terminates in finitely many inner iterations, so that $x^{k+1}$ can be generated. Note that such an $x^{k+1}$ belongs to ${\cal F}$ in view of Step 2a). This together with an induction argument would establish the well-definedness of Algorithm~\ref{SQP_retract}.
 
 \begin{theorem}[{{\bf Well-definedness of Algorithm~\ref{SQP_retract}}}]\label{welldef1}
-Consider \eqref{P0} and suppose that Assumption~\ref{assumption1} holds. Suppose that $x^k\in {\cal F}$ is generated by the $k$-th iteration of Algorithm~\ref{SQP_retract} for some $k \ge 0$. Then the following statements hold:
+Consider \eqref{P0} and suppose that Assumption~\ref{assumption1} holds. Suppose that $x^k\in {\cal F}$ is {\color{blue} generated at the beginning of the $k$-th iteration} of Algorithm~\ref{SQP_retract} for some $k \ge 0$. Then the following statements hold:
 \begin{enumerate}[{\rm (i)}]
    \item The convex subproblem \eqref{subproblem2} has a unique solution. Moreover, $\xfeas$ from Assumption~\ref{assumption1} is a Slater point of the feasible set of \eqref{subproblem2}, that is, $\xfeas\in C$ and $$\max\limits_{1 \le i \le m}\{g_i(x^k) + \langle \nabla g_i(x^k), \xfeas - x^k\rangle\} < 0.$$
    \item If $\max\limits_{1 \le i \le m} \{g_i(\widetilde{u})\} > 0$, then there exists $\widetilde{\tau}\in (0, 1)$ such that $\widetilde{x}:=(1 - \widetilde{\tau})\widetilde{u} + \widetilde{\tau} \xfeas$ satisfies $\max\limits_{1 \le i \le m} \{g_i(\widetilde{x})\} = 0$. Moreover, in this case, for any such $\widetilde\tau$, we have
@@ -590,7 +598,7 @@ Finally, from \eqref{defsigma}, we have $z\mapsto \tilde{\sigma}^z$ is continuou
 Now, we prove the well-definedness of Algorithm~\ref{SQP_retract2}. Recall that ${\cal F}_1$ denotes the feasible set of \eqref{P1}. To prove well-definedness, it suffices to show that, if an $x^k\in {\cal F}_1$  for some $k\ge 0$, then the subproblem~\eqref{subproblem4} has a unique solution, $\widetilde\tau$ exists in Step 2a) and the line-search step in Step 2b) terminates in finitely many inner iterations so that $x^{k+1}$ can be generated: Note that such an $x^{k+1}$ belongs to ${\cal F}_1$ in view of Step 2a) and Lemma~\ref{ell+}(v). This together with an induction argument would establish well-definedness.
 
 \begin{theorem}[{{\bf Well-definedness of Algorithm~\ref{SQP_retract2}}}]\label{welldef2}
-Consider \eqref{P1} and suppose that Assumptions~\ref{gassum} and \ref{assumption4} hold. Suppose that an $x^k\in {\cal F}_1$ is generated by the $k$-th iteration of Algorithm~\ref{SQP_retract2} for some $k\ge 0$. Then the following statements hold:
+Consider \eqref{P1} and suppose that Assumptions~\ref{gassum} and \ref{assumption4} hold. Suppose that an $x^k\in {\cal F}_1$ is generated {\color{blue} at the beginning of the $k$-th iteration} of Algorithm~\ref{SQP_retract2} for some $k\ge 0$. Then the following statements hold:
 \begin{enumerate}[{\rm (i)}]
    \item The convex subproblem \eqref{subproblem4} has a unique solution. Moreover, $\xfeasss$ from Assumption~\ref{assumption4} is a Slater point of the feasible set of \eqref{subproblem4}.
    \item If $\ell^{x^k}(A\widetilde{u} - b) > \tilde{\sigma}^{x^k}$, then there exists $\widetilde{\tau}\in (0, 1)$ such that $\widetilde{x}:=(1 - \widetilde{\tau})\widetilde{u} + \widetilde{\tau} \xfeasss$ with $\ell^{x^k}(A\widetilde{x} - b) = \tilde{\sigma}^{x^k}$. Moreover, for any such $\widetilde\tau$, it holds that
@@ -935,10 +943,11 @@ S\subseteq \left\{x\in\R^n:\; \sum\limits_{J\in\mathcal{J}}\|x_J\| - \mu\|x\| \l
 \]
 Thus, $x\in S$ implies $(1 - \mu)\max\limits_{J\in \mathcal{J}}\|x_J\| \le (1 - \mu)\|x\|\le \sum\limits_{J\in\mathcal{J}}\|x_J\| - \mu\|x\| \le \sum\limits_{J\in\mathcal{J}}\|\tx_J\| - \mu\|\tx\|$. This shows that \eqref{E3} has the same set of optimal solutions as \eqref{E1} if $M \ge (1 - \mu)^{-1}[\sum\limits_{J\in\mathcal{J}}\|\tx_J\| - \mu\|\tx\|]$.
 
-With these choices of $M > 0$, problem \eqref{E3} is a special case of \eqref{P0} with $m = 1$, $P_1(x)= \sum\limits_{J\in\mathcal{J}}\|x_J\|$, $P_2(x) = \mu\|x\|$, $g_1(x) = \|Ax - b\|^2 - \sigma^2$ and $C = \{x\in\R^n:\; \max\limits_{J\in \mathcal{J}}\|x_J\| \leq M\}$. Moreover, Assumption~\ref{assumption1} holds for \eqref{E3} with $\xfeas = \tx$. Therefore, we can apply Algorithm~\ref{SQP_retract} to \eqref{E3}. In our numerical experiments below, we will be solving random instances of \eqref{E3} with $M = (1 - \mu)^{-1}[\sum\limits_{J\in\mathcal{J}}\|\tx_J\| - \mu\|\tx\|]$.
+With these choices of $M > 0$, problem \eqref{E3} is a special case of \eqref{P0} with $m = 1$, $P_1(x)= \sum\limits_{J\in\mathcal{J}}\|x_J\|$, $P_2(x) = \mu\|x\|$, $g_1(x) = \|Ax - b\|^2 - \sigma^2$ and $C = \{x\in\R^n:\; \max\limits_{J\in \mathcal{J}}\|x_J\| \leq M\}$. Moreover, Assumption~\ref{assumption1} holds for \eqref{E3} with $\xfeas = \tx$. Therefore, we can apply Algorithm~\ref{SQP_retract} to \eqref{E3}. In our numerical experiments below, we will be solving random instances of \eqref{E3} with $$M = (1 - \mu)^{-1}[\sum\limits_{J\in\mathcal{J}}\|\tx_J\| - \mu\|\tx\|].$$
 
 \subsection{Compressed sensing with Cauchy noise for complex signals}\label{sec6.2}
 {\color{blue} In compressed sensing for real signals, when the measurement (say, of dimension $2p$) is contaminated with Cauchy noise, the Lorentzian norm $\|y\|_{LL_2,\gamma}:= \sum\limits_{j=1}^{2p}\log(1 + \gamma^{-2}y_j^2)$ can be employed as the loss function \cite{CaBA10,CaRA16}, where $\gamma > 0$ and $y\in \R^{2p}$. Here we explore the scenario when the signal and the measurement matrix have \emph{complex} entries with the transmission contaminated by Cauchy noise. Specifically, in this setting, an unknown sparse vector ${\bf z}_0\in {\mathbb{C}}^n$ is compressed via multiplication with a given matrix ${\bf A}\in \mathbb{C}^{p\times n}$ and the resulting ${\bf A} {\bf z}_0$ is transmitted. The target is to recover approximately the vector ${\bf z}_0$ from the received signal ${\bf b} := {\bf A}{\bf z}_0 + \varepsilon$, where $\varepsilon \in {\mathbb{C}}^p$ is the noise vector, with the real and imaginary parts of each entry following an i.i.d. Cauchy distribution with mean $0$. In view of the structure of $\varepsilon$, we will view it as a random vector in $\R^{2p}$ with i.i.d. Cauchy entries and consider the Lorentzian norm for this real vector in our compressed sensing model below.
+%As we will see soon, this will lead to an optimization model with group  loss function which takes the group lasso
 
 To derive the model, we start by writing
 \[
@@ -986,7 +995,7 @@ Although the feasible region of \eqref{E2} is unbounded and is not a special cas
   \end{array}
 \end{equation}
 as long as $M_1 \ge (1 - \mu)^{-1}[\sum\limits_{J\in\mathcal{J}}\|(A^\dagger b)_J\| - \mu\|A^\dagger b\|]$.
-Notice that \eqref{E4} is a special case of \eqref{P1} with $P_1(x) = \sum\limits_{J\in\mathcal{J}}\|x_J\|$, $P_2(x) = \mu\|x\|$,  $\sigma=\overline{\sigma}$, $\ell(y) = \|y\|_{LL_2,\gamma}$, and $C = \{x\in\R^{2n}:\; \max\limits_{J\in \mathcal{J}}\|x_J\| \leq M_1\}$. One can see  from Example \ref{Loren} that Assumption~\ref{gassum} is satisfied for \eqref{E4}, and Assumption~\ref{assumption4} is satisfied for \eqref{E4} with $\xfeasss = A^\dagger b$. Hence, we can apply Algorithm \ref{SQP_retract2} to \eqref{E4}. In our numerical experiments below, we will be solving random instances of \eqref{E2} with $M_1 = (1 - \mu)^{-1}[\sum\limits_{J\in\mathcal{J}}\|(A^\dagger b)_J\| - \mu\|A^\dagger b\|]$. }
+Notice that \eqref{E4} is a special case of \eqref{P1} with $P_1(x) = \sum\limits_{J\in\mathcal{J}}\|x_J\|$, $P_2(x) = \mu\|x\|$,  $\sigma=\overline{\sigma}$, $\ell(y) = \|y\|_{LL_2,\gamma}$, and $C = \{x\in\R^{2n}:\; \max\limits_{J\in \mathcal{J}}\|x_J\| \leq M_1\}$. One can see  from Example \ref{Loren} that Assumption~\ref{gassum} is satisfied for \eqref{E4}, and Assumption~\ref{assumption4} is satisfied for \eqref{E4} with $\xfeasss = A^\dagger b$. Hence, we can apply Algorithm \ref{SQP_retract2} to \eqref{E4}. In our numerical experiments below, we will be solving random instances of \eqref{E2} with $$M_1 = (1 - \mu)^{-1}[\sum\limits_{J\in\mathcal{J}}\|(A^\dagger b)_J\| - \mu\|A^\dagger b\|].$$ }
 
 \subsection{Numerical results}
 In this subsection, we perform numerical experiments to study the performance of Algorithm~\ref{SQP_retract} on solving \eqref{E3} and that of Algorithm~\ref{SQP_retract2} on solving \eqref{E4}.
@@ -1204,6 +1213,13 @@ Indeed, we observe that the performance of FPA$_{\rm retract}$ can be quite sens
 }
 \end{table}
 
+{\color{blue} \section{Conclusions}
+In this paper, we considered difference-of-convex (DC) programs
+with smooth inequality and simple geometric constraints, and proposed first-order feasible methods for solving this class of nonconvex optimization problems. Our proposed methods were based on affine approximations for the constraints, and maintained the feasibility of the iterates by using a ``retractation step" inspired from the development of manifold optimization. We then established the global subsequential convergence of the sequence generated by the proposed algorithms under strict feasibility condition if the constraint functions are convex. We also showed that our methods can be extended to solve DC
+programs with a single specially structured nonconvex constraint. Finally, we illustrated the promising numerical performance of the proposed methods via two concrete optimization models: group-structured compressed sensing problems with Gaussian measurement noise and compressed sensing problems with Cauchy measurement noise. 
+
+Our results in this paper point out several interesting research questions. For example, in the case where the constraint functions are convex, we established that the sequence generated by our method is bounded, and any cluster point of the generated sequence is a critical point of the underlying optimization problem. It would be interesting to see whether the convexity assumption of the constraint functions can be relaxed as some suitable generalized convexity conditions such as quasi-convexity. Moreover, for nonconvex constrained DC programs, we showed that our method can be extended to solve DC programs with a single specially structured nonconvex constraint. Although this nontrivial extension allows us to cover some important applications such as compressed sensing problems with Cauchy measurement noise, how to further extend this to general nonconvex problems with multiple constraints is also an interesting and challenging research question to pursue. Finally,  \cite{PRA17} discussed the so-called d-stationary points for DC programs which is a stronger notion than the critical points, and designed algorithms with convergence gurantee to d-stationary points. Another interesting research direction is to examine how our methods can be modified to give rise to convergence to d-stationary points. These are some potential future research topics which deserve further study.}
+
 \appendix
 
 \section{Subproblems in FPA$_{\rm retract}$ and ESQM$_{\rm ls}$ for \eqref{E3} and \eqref{E4}}
@@ -1276,6 +1292,12 @@ Note that the first inclusion in \eqref{subKKT11} is equivalent to \eqref{soluti
 
 
 \begin{thebibliography}{99}
+
+{\color{blue}\bibitem{AckOli16} W. van Ackooij and W. de Oliveira.
+\newblock Convexity and optimization with copulae
+structured probability constraints.
+\newblock {\em Optimization}, 65, 1349-1376, 2016.}
+
 
 \bibitem{AhPX17}
 M. Ahn, J. S. Pang and J. Xin.
@@ -1439,6 +1461,7 @@ J.-B. Hiriart-Urruty and C. Lemar\'{e}chal.
 \newblock {\em Fundamentals of Convex Analysis.}
 \newblock Springer, New York, 2001.
 
+
 \bibitem{HoLS13}
 J. D. W. Hosmer, S. Lemeshow and R. X. Sturdivant.
 \newblock {\em  Applied Logistic Regression}.
@@ -1448,6 +1471,13 @@ J. D. W. Hosmer, S. Lemeshow and R. X. Sturdivant.
 C. T. Lawrence and A. L. Tits.
 \newblock A computational efficient feasible sequential quadratic programming algorithm.
 \newblock {\em SIAM Journal on Optimization} 11, 1092--1118, 2001.
+
+{\color{blue}\bibitem{DCA18}
+\newblock H. A. Le Thi and
+T. P. Dinh, DC programming and DCA: thirty years of
+developments.
+\newblock {\em Mathematical Programming Ser. B}  169, 5-68, 2018.}
+
 
 \bibitem{LiPong18}
 G. Li and T. K. Pong.
@@ -1464,6 +1494,11 @@ J. Nocedal and S. Wright.
 \newblock {\em Numerical Optimization}.
 \newblock 2nd edition. Springer, 2006.
 
+
+{\color{blue} \bibitem{PRA17} J.S. Pang, M. Razaviyayn and A. Alvarado,
+\newblock Computing B-stationary points of
+nonsmooth DC programs.
+\newblock {\em Mathematics of Operation Research} 42, 95-118, 2017.}
 
 \bibitem{PaTi93}
 E. R. Panier and A. L. Tits.
@@ -1500,6 +1535,10 @@ H. Tuy.
 %\newblock {A regularized semi-smooth Newton method with projection steps for composite convex programs}.
 %\newblock{\em Journal of Scientific Computing} 76, 364--389, 2018.
 
+{\color{blue}\bibitem{Veinott} A. Veinott.
+\newblock The supporting hyperplane method for unimodal programming,
+\newblock {\em Operations Research}, 15, 147-152, 1967.}
+
 \bibitem{WrightTenny04}
 S. J. Wright and M. J. Tenny.
 \newblock A feasible trust-region sequential quadratic programming algorithm.
@@ -1511,7 +1550,7 @@ P. Yin, Y. Lou, Q. He and J. Xin.
 \newblock{\em SIAM Journal on Scientific Computing} 37, A536--A563, 2015.
 
 \bibitem{YuLiPo19}
-P. Yu , G. Li and T. K. Pong.
+P. Yu, G. Li and T. K. Pong.
 \newblock Kurdyka-{\L}ojasiewicz exponent via inf-projection.
 \newblock Preprint (2019). Available at https://arxiv.org/abs/1902.03635.
 
@@ -1552,6 +1591,21 @@ G. Zou.
 \newblock A modified Poisson regression approach to prospective studies with binary data.
 \newblock {\em American Journal of Epidemiology} 159, 702--706, 2004.
 
+
+
+%\bibitem{Oliveira20}
+%W. de Oliveira.
+%\newblock Sequential difference-of-convex programming.
+%\newblock {\em Journal of
+%Optimization Theory and Applications}, 186, 936-959, 2020.
+
+
+
+
+
+
+
+ 
 \end{thebibliography}
 
 \end{document}

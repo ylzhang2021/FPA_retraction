@@ -213,7 +213,7 @@ In response to the suggestions by the second reviewer, we considered solving com
 
     \item  \textit{\textbf{Reviewer:}} \textit{References: It seems that there exists a more recent version (2016) of [38]. Update [43] and all the referenced results from there to its published version (SIAM J. Optim., 31(3), 2024--2054.).}
 	
-	\textbf{Response:} Thanks for the comment. We have updated the reference. See reference [43].
+	\textbf{Response:} Thanks for the comment. We have updated the reference. See reference [43] {  ([47] in this revised version)}.
 
 
 
@@ -244,12 +244,17 @@ Indeed, the above seems a better title for the work because it connects the core
 
     In contrast, our method only requires a {\it fixed} number of halfspaces in each iteration, and the constraint functions are linearized only at the \emph{current iterate}. Thus, the computational effort for solving each subproblem is similar. Moreover, we have to sufficiently regularize the objective of our subproblem so that our retraction (or interpolation) step induces a descent: this is an ingredient not present in the method in [A,B] because their convergence is based on the fact that the intersection of the \emph{growing} number of halfspaces constructed in their algorithm converges to the original feasible set.
 
-    {\it Difference from [42]}: Apart from the retraction step, the key difference is that we are using linear approximations to the constraint functions in the subproblems, while the method in [42] is based on quadratic \emph{majorants} of the constraint functions. Thus, one obtains a feasible point by solving the subproblems in the algorithm in [42], but one does not necessarily obtain a feasible point by solving the subproblem in the FPA method: hence, a retraction step kicks in to restore feasibility. Finally, as mentioned in footnote 1 on page 2, our subproblems based on linear approximations are potentially simpler to solve than those quadratically constrained subproblems in [42].
+    {\it Difference from [42] {  ([46] in this revision)}}: Apart from the retraction step, the key difference is that we are using linear approximations to the constraint functions in the subproblems, while the method in [42] is based on quadratic \emph{majorants} of the constraint functions. Thus, one obtains a feasible point by solving the subproblems in the algorithm in [42], but one does not necessarily obtain a feasible point by solving the subproblem in the FPA method: hence, a retraction step kicks in to restore feasibility. Finally, as mentioned in the first paragraph in page 3, our subproblems based on linear approximations are potentially simpler to solve than those quadratically constrained subproblems in [42].
 
     {\it Difference from [C,D]:} The algorithms proposed in these papers do not seem to use any approximation to the constraint set or exploit the explicit form of the constraint functions.
 
     {\it Difference from [E]:} The most closely related algorithm is algorithm 2 in [E]. In this algorithm, the DC constraint function is replaced a convex majorant. In spirit, this is similar to what is done in standard DCA (similar to, for example, [42]), and is different from our algorithm as discussed above. Moreover, the algorithm in [E] constructs subproblems by including only constraints that are approximately ``active". This is an ingredient not considered in our algorithm and it is an interesting future research direction as a possible strategy for constructing simpler subproblems for our algorithm.
 
+    {  Following the suggestions, we have now inserted a paragraph (see the last line in page 2 to line 18 at page 3) in clarifying the relationship with our method with some of the papers suggested.
+    
+    Thanks also for the question: whether the convexity assumptions for the constraint functions in the convergence analysis of Algorithm 1 can be established under generalized convexity assumptions (such as quasi-convexity etc). Unfortunately, it seems to us that this is not immediate or trival. The reason lies in the fact that, in our ``retraction step", we make full use of the convexity of the constraint function $g$ to derive the well-definedness of this step (see the argument in two lines before the equation (3.3)). On the other hand, we believe that this would be an interesting future research direction, and we have now discussed this in the conclusion section as one of the future research topics.}
+    
+    
     Finally, after looking at [A,B] kindly suggested by the reviewer, we feel that the term ``support hyperplane method" typically reminds the readers of cutting plane strategy, which usually involves a {\em growing number of} halfspaces constructed from the current and {\em previous iterates}. Our method, in contrast, involves a {\em fixed} number of halfspaces constructed via linear approximating the constraint functions at the current iterate. Thus, we believe that it is better not to mention supporting hyperplane in the title. Keeping the current title may be more appropriate.
 
     \item \textit{\textbf{Reviewer:}} {\it The assumptions are poorly stated. For instance, Assumption 3.1 (announced in the key Theorems 3.1 and 3.2) asserts that $g_i$ is convex and a Slater point exists. However, the authors need much more than this: $g_i$ needs to be differentiable (rightly stated in the proofs and other parts), and the Slater point must be known. Note that knowing a Slater point is much more restrictive than only assuming its existence. We kindly ask the authors to fix this issue.}
@@ -291,14 +296,14 @@ Indeed, the above seems a better title for the work because it connects the core
 
 	\item \textit{\textbf{Reviewer:}} \textit{ g) Please compare the algorithms with the method presented in [42], by the third author.}
 
-    \textbf{Response:} Thanks for the comment. The SCP$_{\rm ls}$ was applied in [42] for solving (6.4):
+    \textbf{Response:} Thanks for the comment. The SCP$_{\rm ls}$ was applied in [42] {  ([46] in this revision)} for solving (6.4):
     \begin{equation}\label{pr1}
        \begin{array}{rl}
         \min\limits_{x\in\R^n} & \|x\|_1 - \mu\|x\| \\
         {\rm s.t.} & \|Ax - b\|_{LL_2,\gamma}\leq \overline{\sigma},
        \end{array}
      \end{equation}
-    We use the same parameter settings as in [42] for SCP$_{\rm ls}$. The computational results are presented in Table 3.
+    We use the same parameter settings as in [42] for SCP$_{\rm ls}$. The computational results are presented in { Table 2}.
 
 \begin{table}[h]
 \caption{Computational results for problem \eqref{pr1} with initial point $x^0$ given as in (6.6) for FPA$_{\rm retract}$ and ESQM, while SCP$_{\rm ls}$ is initialized at $x^\circledcirc$.}\label{table3}
@@ -338,10 +343,10 @@ Indeed, the above seems a better title for the work because it connects the core
 \end{center}
 \end{table}
 
-From Table 3, one can see that the recovery errors of the algorithms are comparable, and SCP$_{\rm ls}$ is usually faster. This is likely because SCP$_{\rm ls}$ can take advantage of BB step size (and hence some sort of second-order information), but currently we still do not know how to take advantage of second-order information suitably in our scheme.
+From Table 2, one can see that the recovery errors of the algorithms are comparable, and SCP$_{\rm ls}$ is usually faster. This is likely because SCP$_{\rm ls}$ can take advantage of BB step size (and hence some sort of second-order information), but currently we still do not know how to take advantage of second-order information suitably in our scheme.
 
-From Table 3, it appears that our proposed method is not the method of choice when it comes to solving \eqref{pr1}.
-Note that although the subproblems of SCP$_{\rm ls}$ for \eqref{pr1} involve nonlinear constraints, thanks to the polyhedral nature of $\ell_1$ norm, they can still be solved efficiently via some root-finding procedure; see the appendix of [43]. This prompts us to consider some other objective functions where the corresponding SCP$_{\rm ls}$ subproblems are not easy while the subproblems for our method (which are linearly constrained) can still be solved efficiently using Newton's method; this setting would be closer to our original motivation, as stated in footnote 1 of the manuscript.
+From Table 2, it appears that our proposed method is not the method of choice when it comes to solving \eqref{pr1}.
+Note that although the subproblems of SCP$_{\rm ls}$ for \eqref{pr1} involve nonlinear constraints, thanks to the polyhedral nature of $\ell_1$ norm, they can still be solved efficiently via some root-finding procedure; see the appendix of [43] { ([47] in this revision)}. This prompts us to consider some other objective functions where the corresponding SCP$_{\rm ls}$ subproblems are not easy while the subproblems for our method (which are linearly constrained) can still be solved efficiently using Newton's method; this setting would be closer to our original motivation, as stated in footnote 1 of the manuscript.
 
 One natural scenario arises from compressed sensing problems for complex signals with Cauchy noise, which results in the following problem that involves group-LASSO type objective. The derivation is detailed in the updated Section 6.2.
 \begin{equation}\label{E2}
