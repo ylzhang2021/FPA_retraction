@@ -1,0 +1,46 @@
+\documentclass{article}
+\usepackage{amsmath,amsfonts,verbatim}
+\usepackage{color}
+\usepackage{booktabs}
+\usepackage{multirow}
+\oddsidemargin 0in
+\textwidth 6.5in
+\textheight=9in
+\topmargin=-0.5in
+
+\allowdisplaybreaks[3]
+\newcommand{\rrev}[1]{{\color{blue}#1}}
+
+\def\R{\mathbb{R}}
+
+\begin{document}
+
+\section*{Author's responses to Reviewers' comments:}
+Thank you very much for reading the manuscript carefully and providing useful suggestions. The following is our response to your suggestions and comments one by one.
+
+\textbf{Reviewer $\# 2$:}
+
+\begin{enumerate}
+	\item \textit{\textbf{Reviewer:}} \textit{ It seems that the recovery errors of SPGL1 suggest that the solver computed critical points of poorer quality in the interior of the feasible set. Is that correct?}
+	
+	\textbf{Response:} Thanks for the comment. We cannot totally agree with this specific comment. 
+
+First of all, the SPGL1 is not solving the same problem as FPA$_{\rm retract}$, but a problem with the objective function being $\|\cdot\|_1$. These problems may have different sets of critical points. 
+
+Furthermore, concerning the comment ``in the interior of the feasible set", while this comment is true for the test instances described in Section 6.1, it may not be true for those instances in Section 6.2. Indeed, the problem that SPGL1 solves in the latter case is (6.8), whose constraint set is contained \emph{inside} the feasible set of the original problem. Thus, for this latter class of problems, it is natural to expect SPGL1 to return a solution in the interior of the feasible set of the original problem.
+	
+    \item \textit{\textbf{Reviewer:}} \textit{P3, L12-14: You mention that "Thus, the computational effort solving each subproblem is similar in our method."
+        This claim is invalid for the Supporting Hyperplane Method (SHM) variant of [1] that requires solving a strongly convex quadratic program per iteration (assuming C is a polyhedron) instead of a convex program as in your method.}
+	
+    \textbf{Response:} Thanks for the comment.  We believe that there could be some misunderstanding. In this sentence, we did not intend to compare our methods with [1]. We just wanted to emphasize that each subproblem in our method bears similar computational cost. To avoid misunderstanding, we rephrased it as ``Thus, each subproblem in our method bears a similar computational cost".
+\end{enumerate}	
+
+\textbf{Communicating Editor:}
+\begin{enumerate}
+	\item  \textit{\textbf{Reviewer:}} \textit{ I know of a bundle method having a low computational cost per iteration and yet being able to handle more general DC programs than those considered in the revised manuscript. This bundle method, published in https://doi.org/10.1007/s10589-020-00241-8, does not require differentiability of either objective or constraint function, does require a Slater point, and needs solving only a strongly convex QP program of limited size per iteration.  In the interest of completeness, I ask the authors to consider this work in the context of their own contribution.}
+	
+	\textbf{Response:} Thanks for suggesting this reference. Like ESQM$_{\rm ls}$, this bundle method is an infeasible method, while our FPA$_{\rm retract}$ is a feasible algorithm. This reference is now cited under the new footnote 6 as a variant of ESQM$_{\rm ls}$ applicable in a more general setting.
+	
+\end{enumerate}
+
+\end{document}
