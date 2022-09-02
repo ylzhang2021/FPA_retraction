@@ -13,6 +13,7 @@
 \begin{document}
 \section*{Author's responses to Reviewers' comments:}
 Thank you very much for reading the manuscript carefully and providing useful suggestions. The following is our response to your suggestions and comments one by one.
+
 \textbf{Reviewer $\# 2$:}
 \begin{enumerate}
         \item \textit{\textbf{Reviewer:}} \textit{ We thank the authors for addressing all points raised in our report. In particular, we appreciate the new numerical experiments and the modifications explicitly stating the necessary assumptions. We kindly ask the authors to comment in the text on the results by SPGL1. It seems that the recovery errors of SPGL1 suggest that the solver computed critical points of poorer quality in the interior of the feasible set. Is that correct?}
@@ -35,7 +36,7 @@ not to mention this.
 \end{enumerate}
 \textbf{Communicating Editor:}
 \begin{enumerate}
-        \item  \textit{\textbf{Reviewer:}} \textit{ I know of a bundle method having a low computational cost per iteration and yet being able to handle more general DC programs than those considered in the revised manuscript. This bundle method, published in https://doi.org/10.1007/s10589-020-00241-8, does not require differentiability of either objective or constraint function, does require a Slater point, and needs solving only a strongly convex QP program of limited size per iteration.  In the interest of completeness, I ask the authors to consider this work in the context of their own contribution.}
+        \item  \textit{\textbf{Editor:}} \textit{ I know of a bundle method having a low computational cost per iteration and yet being able to handle more general DC programs than those considered in the revised manuscript. This bundle method, published in https://doi.org/10.1007/s10589-020-00241-8, does not require differentiability of either objective or constraint function, does require a Slater point, and needs solving only a strongly convex QP program of limited size per iteration.  In the interest of completeness, I ask the authors to consider this work in the context of their own contribution.}
 
         \textbf{Response:} Thanks for suggesting this interesting and highly related reference. As noted, the bundle method in this new reference can handle general  DC programs with possible non-smooth objective/constraint functions. On the other hand, like ESQM$_{\rm ls}$, this bundle method is an infeasible method, while our FPA$_{\rm retract}$ is a feasible algorithm.  This reference has now been discussed and now cited in the introduction (see the second last sentence in the first paragraph at page 3).
 
