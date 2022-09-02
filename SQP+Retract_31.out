@@ -1,0 +1,18 @@
+\BOOKMARK [1][-]{section.1}{Introduction}{}% 1
+\BOOKMARK [1][-]{section.2}{Notation and preliminaries}{}% 2
+\BOOKMARK [1][-]{section.3}{Convex constraints with an explicit strict feasible point}{}% 3
+\BOOKMARK [2][-]{subsection.3.1}{Convergence rate analysis in convex setting}{section.3}% 4
+\BOOKMARK [1][-]{section.4}{Extension: Structured non-convex constraint with strong strict feasibility}{}% 5
+\BOOKMARK [1][-]{section.5}{Explicit Kurdyka-\225ojasiewicz exponent for some structured convex optimization models}{}% 6
+\BOOKMARK [2][-]{subsection.5.1}{Case 1: h is the sum of the 1 norm and the indicator function of a polyhedron containing the origin}{section.5}% 7
+\BOOKMARK [2][-]{subsection.5.2}{Case 2: h is the sum of a closed gauge and the Euclidean norm}{section.5}% 8
+\BOOKMARK [2][-]{subsection.5.3}{Case 3: h is the sum of group LASSO penalty and a block-structured closed gauge}{section.5}% 9
+\BOOKMARK [1][-]{section.6}{Numerical experiments}{}% 10
+\BOOKMARK [2][-]{subsection.6.1}{Group sparse signals with Gaussian noise}{section.6}% 11
+\BOOKMARK [2][-]{subsection.6.2}{Compressed sensing with Cauchy noise}{section.6}% 12
+\BOOKMARK [2][-]{subsection.6.3}{Numerical results}{section.6}% 13
+\BOOKMARK [3][-]{subsubsection.6.3.1}{ Group LASSO with Gaussian noise. }{subsection.6.3}% 14
+\BOOKMARK [3][-]{subsubsection.6.3.2}{ Compressed sensing with Cauchy noise}{subsection.6.3}% 15
+\BOOKMARK [1][-]{appendix.A}{Subproblems in FPAretract and ESQMls for \(6.2\) and \(6.4\)}{}% 16
+\BOOKMARK [2][-]{subsection.A.1}{Solving the subproblem in FPAretract for \(6.2\) and \(6.4\) }{appendix.A}% 17
+\BOOKMARK [2][-]{subsection.A.2}{Solving the subproblems in ESQMls for \(6.2\) and \(6.4\)}{appendix.A}% 18
